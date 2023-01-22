@@ -1,58 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>SPARQL 1.2 Protocol</title>
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<html lang="EN">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.6.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>SPARQL 1.1 Protocol</title>
+  <style type="text/css">
 
-    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
-    <script src="./common/local-biblio.js" class="remove"></script>
-    <script src="./common/fixup.js" class="remove"></script>
-
-    <script class="remove">
-      // All config options at https://respec.org/docs/
-      var respecConfig = {
-        group:                "rdf-star" ,
-        localBiblio:          localBibliography,
-        specStatus:           "ED",
-        edDraftURI:           "https://w3c.github.io/sparql12-protocol/spec/",
-        testSuiteURI:         "https://w3c.github.io/rdf-tests/",
-        shortName:            "sparql12-protocol",
-        copyrightStart:       "2008",
-         
-        github:               "https://github.com/w3c/sparql-protocol",
-        wgPublicList:         "public-rdf-star-wg",
-
-//        implementationReportURI: "https://w3c.github.io/sparql12-protocol/reports/",
-//        errata:               "https://w3c.github.io/sparql12-protocol/errata/",
-
-        previousPublishDate:  "2013-03-21",
-        prevRecURI:           "https://www.w3.org/TR/2013/REC-sparql11-protocol-20130321",
-        prevRecShortname:     "sparql11-protocol",
-        previousPublishDate:  "2013-03-21",
-        previousMaturity:     "REC",
-        
-         editors: [
-           { name: "RDF Star Working Group" }
-         ],
-        formerEditors: [
-          { name: "Lee Feigenbaum" },
-          { name: "Gregory Todd Williams" },
-          { name: "Kendall Grant Clark" },
-          { name: "Elias Torres" },
-        ],
-
-        //doJsonLd:     true,
-        
-        lint: { "no-unused-dfns": false }
-      };
-    </script>
-
-    <style type="text/css">
-      @import url("local.css");
-
-      /* ReSpec */
-      dfn { font-style: normal ; }
-      /* ReSpec */
+  @import url("local.css");
 
   code           { font-family: monospace; }
 
@@ -87,51 +41,138 @@
   em.rfc2119 { text-transform: lowercase;
              font-variant: small-caps;
              font-style: normal; }
-    </style>
-  </head>
-  <body>
-    <section id="abstract">
-      <h2>Abstract</h2>
-<p>The SPARQL Protocol and RDF Query Language (<span title="SPARQL Protocol And RDF Query Language">SPARQL</span>) is a query language and protocol for <a href=
+  </style>
+  <link rel="stylesheet" type="text/css" href="http://www.w3.org/StyleSheets/TR/W3C-REC.css">
+</head>
+<body>
+  <div class="head">
+    <p><a href="http://www.w3.org/"><img src="SPARQL%201.1%20Protocol_files/w3c_home.svg" alt="W3C" width="72" height="48"></a></p>
+    <h1><a name="title" id="title"></a>SPARQL 1.1 Protocol</h1>
+    <h2><a name="w3c-doctype" id="w3c-doctype"></a>W3C Recommendation 21 March 2013</h2>
+    <dl>
+      <dt>This version:</dt>
+      <dd><a href="http://www.w3.org/TR/2013/REC-sparql11-protocol-20130321/">http://www.w3.org/TR/2013/REC-sparql11-protocol-20130321/</a></dd>
+      <dt>Latest version:</dt>
+      <dd><a href="http://www.w3.org/TR/sparql11-protocol/">http://www.w3.org/TR/sparql11-protocol/</a></dd>
+      <dt>Previous version:</dt>
+      <dd><a href="http://www.w3.org/TR/2013/PR-sparql11-protocol-20130129/">http://www.w3.org/TR/2013/PR-sparql11-protocol-20130129/</a></dd>
+      <dt>Editors:</dt>
+      <dd>Lee Feigenbaum, Cambridge Semantics <a href="mailto:lee@thefigtrees.net">&lt;lee@thefigtrees.net&gt;</a></dd>
+      <dd>Gregory Todd Williams, Rensselaer Polytechnic Institute <a href="mailto:greg@evilfunhouse.com">&lt;greg@evilfunhouse.com&gt;</a></dd>
+      <dd>Kendall Grant Clark, 1st Edition, Clark &amp; Parsia LLC <a href="mailto:kendall@clarkparsia.com">&lt;kendall@clarkparsia.com&gt;</a></dd>
+      <dd>Elias Torres, 1st Edition, IBM Corporation <a href="mailto:eliast@us.ibm.com">&lt;eliast@us.ibm.com&gt;</a></dd>
+    </dl>
+    <p>Please refer to the <a href="http://www.w3.org/2013/sparql-errata#sparql11-protocol"><strong>errata</strong></a> for this document, which may include some normative corrections.</p>
+    <p>See also <a href="http://www.w3.org/2003/03/Translations/byTechnology?technology=sparql11-protocol"><strong>translations</strong></a>.</p>
+    <p class="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>&nbsp;©&nbsp;2013&nbsp;<a href="http://www.w3.org/"><acronym title=
+    "World Wide Web Consortium">W3C</acronym></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><acronym title="Massachusetts Institute of Technology">MIT</acronym></a>, <a href=
+    "http://www.ercim.eu/"><acronym title="European Research Consortium for Informatics and Mathematics">ERCIM</acronym></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href=
+    "http://ev.buaa.edu.cn/">Beihang</a>), All Rights Reserved. W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href=
+    "http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.</p>
+  </div>
+  <hr>
+  <div>
+    <h2><a name="abstract" id="abstract"></a>Abstract</h2>
+    <p>The SPARQL Protocol and RDF Query Language (<span title="SPARQL Protocol And RDF Query Language">SPARQL</span>) is a query language and protocol for <a href=
     "http://www.w3.org/RDF/">RDF</a>. This document specifies the SPARQL Protocol; it describes a means for conveying SPARQL queries and updates to a SPARQL processing service and returning the
     results via HTTP to the entity that requested them. This protocol was developed by the <a href="http://www.w3.org/2009/sparql/wiki/Main_Page">W3C SPARQL Working Group</a>, part of the <a href=
     "http://www.w3.org/2001/sw/">Semantic Web Activity</a> as described in the <a href="http://www.w3.org/2001/sw/Activity">activity statement</a> .</p>
-    </section>
-
-    <section id="sotd" class="introductory">
-      <p>
-        This specification is published by the
-        <a href="https://www.w3.org/groups/wg/rdf-star">RDF Star Working Group</a> as part of the
-        update of specifications for format and errata.
-      </p>
-    </section>
-
-    <!--
-        @@ Includes too much - all RDF documents.
-    <section id="related" data-include="./common/related.html"></section>
-    -->
-
-    <section id="sparql12-documents" class="introductory">
-      <h2>SPARQL 1.2 Documents</h2>
-      <ul>
-        <li><a href="../../sparql-new/spec/index.html">SPARQL 1.2 New</a></li>
-        <li><a href="../../sparql-concepts/spec/index.html">SPARQL 1.2 Overview</a></li>
-        <li><a href="../../sparql-query/spec/index.html">SPARQL 1.2 Query Language</a></li>
-        <li><a href="../../sparql-update/spec/index.html">SPARQL 1.2 Update</a></li>
-        <li><a href="../../sparql-entailment/spec/index.html">SPARQL 1.2 Entailment Regimes</a></li>
-        <li><a href="../../sparql-service-description/spec/index.html">SPARQL 1.2 Service Description</a></li>
-        <li><a href="../../sparql-federated-query/spec/index.html">SPARQL 1.2 Federated Query</a></li>
-        <li><a href="../../sparql-results-json/spec/index.html">SPARQL 1.2 Query Results JSON Format</a></li>
-        <li><a href="../../sparql-results-csv-tsv/spec/index.html">SPARQL 1.2 Query Results CSV and TSV Formats</a></li>
-        <li><a href="../../sparql-results-xml/spec/index.html">SPARQL 1.2 Query Results XML Format</a></li>
-        <li><a href="../../sparql-graph-store-protocol/spec/index.html">SPARQL 1.2 Graph Store Protocol</a></li>
-        <li><a href="../../sparql-protocol/spec/index.html">SPARQL 1.2 Protocol</a></li>
-      </ul>
-    </section>
-    
-<!-- BODY -->
-    <section id="intro">
-      <h2>Introduction</h2>
+  </div>
+  <div>
+    <h2><a name="status" id="status"></a>Status of this Document</h2>
+    <h4 id="may-be">May Be Superseded</h4>
+    <p><em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current W3C publications and the latest revision
+    of this technical report can be found in the <a href="http://www.w3.org/TR/">W3C technical reports index</a> at http://www.w3.org/TR/.</em></p>
+    <h4 id="related">Set of Documents</h4>
+    <p>This document is one of eleven SPARQL 1.1 Recommendations produced by the <a href="http://www.w3.org/2001/sw/DataAccess/">SPARQL Working Group</a>:</p>
+    <ol>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-overview-20130321">SPARQL 1.1 Overview</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321">SPARQL 1.1 Query Language</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-update-20130321">SPARQL 1.1 Update</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-service-description-20130321">SPARQL1.1 Service Description</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-federated-query-20130321">SPARQL 1.1 Federated Query</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-results-json-20130321">SPARQL 1.1 Query Results JSON Format</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-results-csv-tsv-20130321">SPARQL 1.1 Query Results CSV and TSV Formats</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-rdf-sparql-XMLres-20130321">SPARQL Query Results XML Format (Second Edition)</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-entailment-20130321">SPARQL 1.1 Entailment Regimes</a></li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-protocol-20130321">SPARQL 1.1 Protocol</a> (this document)</li>
+      <li><a href="http://www.w3.org/TR/2013/REC-sparql11-http-rdf-update-20130321">SPARQL 1.1 Graph Store HTTP Protocol</a></li>
+    </ol>
+    <h4 class="no-toc no-num" id="status-changes">No Substantive Changes</h4>
+    <p>There have been no substantive changes to this document since the <a href="http://www.w3.org/TR/2013/PR-sparql11-protocol-20130129/">previous version</a>. Minor editorial changes, if any, are
+    detailed in the <a href="#changes-since-pr">change log</a> and visible in the <a href="https://www.w3.org/TR/2013/REC-sparql11-protocol-20130321/diff">color-coded diff</a>.</p>
+    <h4 class="no-toc no-num" id="please">Please Send Comments</h4>
+    <p>Please send any comments to <a class="mailto" href="mailto:public-rdf-dawg-comments@w3.org">public-rdf-dawg-comments@w3.org</a> (<a class="http" href=
+    "http://lists.w3.org/Archives/Public/public-rdf-dawg-comments/">public archive</a>). Although work on this document by the <a href="http://www.w3.org/2009/sparql/">SPARQL Working Group</a> is
+    complete, comments may be addressed in the <a href="http://www.w3.org/2013/sparql-errata">errata</a> or in future revisions. Open discussion is welcome at <a class="mailto" href=
+    "mailto:public-sparql-dev@w3.org">public-sparql-dev@w3.org</a> (<a class="http" href="http://lists.w3.org/Archives/Public/public-sparql-dev/">public archive</a>).</p>
+    <h4 class="no-toc no-num" id="endorsement">Endorsed By W3C</h4>
+    <p><em>This document has been reviewed by W3C Members, by software developers, and by other W3C groups and interested parties, and is endorsed by the Director as a W3C Recommendation. It is a
+    stable document and may be used as reference material or cited from another document. W3C's role in making the Recommendation is to draw attention to the specification and to promote its
+    widespread deployment. This enhances the functionality and interoperability of the Web.</em></p>
+    <h4 id="patents">Patents</h4>
+    <p><em>This document was produced by a group operating under the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>. W3C maintains a <a href=
+    "http://www.w3.org/2004/01/pp-impl/35463/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group; that page also includes
+    instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains <a href=
+    "http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href=
+    "http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>.</em></p>
+  </div>
+  <div class="toc">
+    <h2><a name="contents" id="contents"></a>Table of Contents</h2>
+    <p class="toc">1 <a href="#intro">Introduction</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;1.1 <a href="#conventions">Document Conventions</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;1.2 <a href="#terminology">Terminology</a><br>
+    2 <a href="#protocol">SPARQL Protocol Operations</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;2.1 <a href="#query-operation">query operation</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.1 <a href="#query-via-get">query via GET</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.2 <a href="#query-via-post-urlencoded">query via POST with URL-encoded parameters</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.3 <a href="#query-via-post-direct">query via POST directly</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.4 <a href="#dataset">Specifying an RDF Dataset</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.5 <a href="#conneg">Accepted Response Formats</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.6 <a href="#query-success">Success Responses</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.1.7 <a href="#query-failure">Failure Responses</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;2.2 <a href="#update-operation">update operation</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.1 <a href="#update-via-post-urlencoded">update via POST with URL-encoded parameters</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.2 <a href="#update-via-post-direct">update via POST directly</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.3 <a href="#update-dataset">Specifying an RDF Dataset</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.4 <a href="#update-success">Success Responses</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.2.5 <a href="#update-failure">Failure Responses</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;2.3 <a href="#base-iri">Determining the Base IRI</a><br>
+    3 <a href="#examples">Example SPARQL Protocol Requests (informative)</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;3.1 <a href="#query-bindings-http-examples">Examples of SPARQL Query</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.1 <a href="#select-svcsupplied">SELECT with service-supplied RDF Dataset</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.2 <a href="#select-simple">SELECT with simple RDF Dataset</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.3 <a href="#construct-simple">CONSTRUCT with simple RDF dataset and HTTP content negotiation</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.4 <a href="#ask-simple">ASK with simple RDF Dataset</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.5 <a href="#describe-simple">DESCRIBE with simple RDF Dataset</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.6 <a href="#select-complex">SELECT with complex RDF Dataset</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.7 <a href="#select-queryonly">SELECT with query-only RDF Dataset</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.8 <a href="#select-ambiguous">SELECT with ambiguous RDF Dataset</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.9 <a href="#select-malformed">SELECT with malformed query fault</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.10 <a href="#select-refused">SELECT with query request refused fault</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.11 <a href="#select-longpost">Long SELECT query using POST with URL encoding</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.12 <a href="#select-longpost-direct">Long SELECT query using direct POST</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.1.13 <a href="#select-kanji">SELECT with internationalization</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;3.2 <a href="#update-bindings-http-examples">Examples of SPARQL Update</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.1 <a href="#update-urlencoded-simple">UPDATE using URL-encoded parameters</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.2 <a href="#update-direct-simple">UPDATE using POST directly</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.3 <a href="#update-direct-simple-dataset">UPDATE specifying dataset and using POST directly</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.4 <a href="#update-urlencoded-multi">Multi-operation UPDATE using URL-encoded parameters</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.5 <a href="#update-urlencoded-multi-dataset">Multi-operation UPDATE specifying dataset and using URL-encoded parameters</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.2.6 <a href="#update-direct-multi-dataset">Multi-operation UPDATE specifying dataset and using POST directly</a><br>
+    4 <a href="#policy">Policy Considerations</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;4.1 <a href="#policy-security">Security</a><br>
+    5 <a href="#conformance">Conformance</a><br>
+    6 <a href="#changes">Changes Since Previous Recommendation (Informative)</a><br></p>
+    <h3><a name="appendices" id="appendices"></a>Appendix</h3>
+    <p class="toc">A <a href="#sec-bibliography">References</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;A.1 <a href="#sec-existing-stds">Normative References</a><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;A.2 <a href="#sec-other-references">Other References</a><br></p>
+  </div>
+  <hr>
+  <div class="body">
+    <div class="div1">
+      <h2><a name="intro" id="intro"></a>1 Introduction</h2>
       <p>This document describes the SPARQL 1.1 Protocol, a means of conveying SPARQL queries and updates from clients to SPARQL processors. The SPARQL Protocol has been designed for compatibility
       with the <a href="http://www.w3.org/TR/sparql11-query/">SPARQL 1.1 Query Language</a> [<a href="#sparql">SPARQL</a>] and with the <a href="http://www.w3.org/TR/sparql11-update/">SPARQL 1.1
       Update Language for RDF</a>. This document is primarily intended for software developers interested in implementing SPARQL query and update services and clients.</p>
@@ -140,14 +181,14 @@
       originating client.</p>
       <p>A separate document describes the <a href="http://www.w3.org/TR/sparql11-http-rdf-update/">SPARQL 1.1 Graph Store HTTP Protocol</a> which describes the use of HTTP operations for the purpose
       of managing a collection of graphs in the REST architectural style.</p>
-      <section id="conventions">
-        <h3>Document Conventions</h3>
+      <div class="div2">
+        <h3><a name="conventions" id="conventions"></a>1.1 Document Conventions</h3>
         <p>When this document uses the words <strong>must</strong>, <strong>must not</strong>, <strong>should</strong>, <strong>should not</strong>, <strong>may</strong> and
         <strong>recommended</strong>, and the words appear as emphasized text, they must be interpreted as described in <a href="http://www.faqs.org/rfcs/rfc2119.html">RFC 2119</a> [<a href=
         "#rfc2119">RFC2119</a>].</p>
-      </section>
-      <section id="terminology">
-        <h3>Terminology</h3>
+      </div>
+      <div class="div2">
+        <h3><a name="terminology" id="terminology"></a>1.2 Terminology</h3>
         <dl>
           <dt>SPARQL Protocol client</dt>
           <dd>An HTTP client (as defined by <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec1.html#sec1.3">RFC 2616</a> [<a href="#rfc2616">RFC2616</a>]) that sends HTTP requests for SPARQL
@@ -162,10 +203,10 @@
           <dt>RDF Dataset</dt>
           <dd>A collection of a default graph and zero or more named graphs, as defined by the <a href="http://www.w3.org/TR/sparql11-query/#rdfDataset">SPARQL 1.1 Query Language</a>.</dd>
         </dl>
-      </section>
-    </section>
-    <section id="protocol">
-      <h2>SPARQL Protocol Operations</h2>
+      </div>
+    </div>
+    <div class="div1">
+      <h2><a name="protocol" id="protocol"></a>2 SPARQL Protocol Operations</h2>
       <p>The SPARQL Protocol consists of two operations: query and update. A protocol operation defines combinations of:</p>
       <ul>
         <li>The HTTP method by which the request is sent.</li>
@@ -174,8 +215,8 @@
         <li>The message content included in the HTTP response body.</li>
       </ul>
       <p>The SPARQL 1.1 Protocol is built on top of HTTP. All HTTP requirements for requests and responses <strong>must</strong> be followed.</p>
-      <section id="query-operation">
-        <h3><code>query</code> operation</h3>
+      <div class="div2">
+        <h3><a name="query-operation" id="query-operation"></a>2.1 <code>query</code> operation</h3>
         <p>The <code>query</code> operation is used to send a SPARQL query to a service and receive the results of the query. The query operation <strong>MUST</strong> be invoked with either the HTTP
         GET or HTTP POST method. Client requests for this operation <strong>must</strong> include exactly one SPARQL query string (parameter name: <code>query</code>) and <strong>may</strong> include
         zero or more default graph URIs (parameter name: <code>default-graph-uri</code>) and named graph URIs (parameter name: <code>named-graph-uri</code>). The response to a query request is either
@@ -222,30 +263,30 @@
           </tbody>
         </table>
         <p>The <code>query</code> request's parameters <strong>must</strong> be sent according to one of these three options:</p>
-        <section id="query-via-get">
-          <h4><code>query</code> via GET</h4>
+        <div class="div3">
+          <h4><a name="query-via-get" id="query-via-get"></a>2.1.1 <code>query</code> via GET</h4>
           <p>Protocol clients <strong>may</strong> send protocol requests via the HTTP GET method. When using the GET method, clients <strong>must</strong> URL <a href=
           "http://www.ietf.org/rfc/rfc3986.txt">percent encode</a> all parameters and include them as <a href="http://www.ietf.org/rfc/rfc3986.txt">query parameter</a> strings with the names given
           above [<a href="#rfc3986">RFC3986</a>].</p>
           <p>HTTP query string parameters <strong>must</strong> be separated with the ampersand (<code>&amp;</code>) character. Clients may include the query string parameters in any order.</p>
           <p>The HTTP request <strong>MUST NOT</strong> include a message body.</p>
-        </section>
-        <section id="query-via-post-urlencoded">
-          <h4><code>query</code> via POST with URL-encoded parameters</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="query-via-post-urlencoded" id="query-via-post-urlencoded"></a>2.1.2 <code>query</code> via POST with URL-encoded parameters</h4>
           <p>Protocol clients <strong>may</strong> send protocol requests via the HTTP POST method by URL encoding the parameters. When using this method, clients <strong>must</strong> URL <a href=
           "http://www.ietf.org/rfc/rfc3986.txt">percent encode</a> [<a href="#rfc3986">RFC3986</a>] all parameters and include them as parameters within the request body via the
           <code>application/x-www-form-urlencoded</code> media type with the name given above. Parameters <strong>must</strong> be separated with the ampersand (<code>&amp;</code>) character. Clients
           may include the parameters in any order. The content type header of the HTTP request <strong>must</strong> be set to <code>application/x-www-form-urlencoded</code>.</p>
-        </section>
-        <section id="query-via-post-direct">
-          <h4><code>query</code> via POST directly</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="query-via-post-direct" id="query-via-post-direct"></a>2.1.3 <code>query</code> via POST directly</h4>
           <p>Protocol clients <strong>may</strong> send protocol requests via the HTTP POST method by including the query directly and unencoded as the HTTP request message body. When using this
           approach, clients <strong>must</strong> include the SPARQL query string, unencoded, and nothing else as the message body of the request. Clients <strong>must</strong> set the content type
           header of the HTTP request to <code>application/sparql-query</code>. Clients <strong>may</strong> include the optional <code>default-graph-uri</code> and <code>named-graph-uri</code>
           parameters as HTTP query string parameters in the request URI. Note that UTF-8 is the only valid charset here.</p>
-        </section>
-        <section id="dataset">
-          <h4>Specifying an RDF Dataset</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="dataset" id="dataset"></a>2.1.4 Specifying an RDF Dataset</h4>
           <p>A SPARQL query is executed against an <a href="http://www.w3.org/TR/sparql11-query/#rdfDataset">RDF Dataset</a>. The RDF Dataset for a query may be specified either via the
           <code>default-graph-uri</code> and <code>named-graph-uri</code> parameters in the SPARQL Protocol or in the SPARQL query string using the <code>FROM</code> and <code>FROM NAMED</code>
           keywords. If different RDF Datasets are specified in both the protocol request and the SPARQL query string, then the SPARQL service <strong>must</strong> execute the query using the RDF
@@ -253,14 +294,14 @@
           <p>Note that a service <strong>may</strong> reject a query with HTTP response code 400 if the service does not allow protocol clients to specify the RDF Dataset.</p>
           <p>If an RDF Dataset is not specified in either the protocol request or the SPARQL query string, then implementations <strong>may</strong> execute the query against an
           implementation-defined default RDF dataset.</p>
-        </section>
-        <section id="conneg">
-          <h4>Accepted Response Formats</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="conneg" id="conneg"></a>2.1.5 Accepted Response Formats</h4>
           <p>Protocol clients <strong>should</strong> use HTTP <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html">content negotiation</a> [<a href="#rfc2616">RFC2616</a>] to request
           response formats that the client can consume. See below for more on potential response formats.</p>
-        </section>
-        <section id="query-success">
-          <h4>Success Responses</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="query-success" id="query-success"></a>2.1.6 Success Responses</h4>
           <p>The SPARQL Protocol uses the response status codes defined in HTTP to indicate the success or failure of an operation. Consult the <a href=
           "http://www.w3.org/Protocols/rfc2616/rfc2616.html">HTTP specification</a> [<a href="#rfc2616">RFC2616</a>] for detailed definitions of each status code. While a protocol service
           <strong>should</strong> use a 2XX HTTP response code for a successful query, it <strong>may</strong> choose instead to use a 3XX response code as per HTTP.</p>
@@ -274,9 +315,9 @@
             "http://www.w3.org/2001/sw/DataAccess/rq23/#construct">CONSTRUCT</a>).</li>
           </ul>
           <p>The content type of the response to a successful query operation must be the media type defined for the format of the response body.</p>
-        </section>
-        <section id="query-failure">
-          <h4>Failure Responses</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="query-failure" id="query-failure"></a>2.1.7 Failure Responses</h4>
           <p>The HTTP response codes applicable to an unsuccessful query operation include:</p>
           <ul>
             <li>400 if the SPARQL query supplied in the request is not a legal sequence of characters in the language defined by the SPARQL grammar; or,</li>
@@ -286,14 +327,14 @@
           <p>The response body of a failed query request is implementation defined. Implementations <strong>may</strong> use HTTP content negotiation to provide human-readable or machine-processable
           (or both) information about the failed query request.</p>
           <p>A protocol service <strong>may</strong> use other 4XX or 5XX HTTP response codes for other failure conditions, as per HTTP.</p>
-        </section>
-      </section>
-      <section id="update-operation">
-        <h3><code>update</code> operation</h3>
+        </div>
+      </div>
+      <div class="div2">
+        <h3><a name="update-operation" id="update-operation"></a>2.2 <code>update</code> operation</h3>
         <p>The <code>update</code> operation is used to send a SPARQL update request to a service. The update operation <strong>must</strong> be invoked using the HTTP POST method. Client requests
         for this operation <strong>must</strong> include exactly one SPARQL update request string (parameter name: <code>update</code>) and <strong>may</strong> include zero or more default graph
         URIs (parameter name: <code>using-graph-uri</code>) and named graph URIs (parameter name: <code>using-named-graph-uri</code>). The response to an update request indicates success or failure
-        of the request via HTTP response status code.</p><span class="doc-ref" id="update-summary"></span>
+        of the request via HTTP response status code.</p><a name="update-summary" id="update-summary"></a>
         <table style="margin-left: auto; margin-right: auto; border-color: rgb(0, 0, 0); border-collapse: collapse;" cellpadding="5" border="1">
           <tbody>
             <tr>
@@ -324,22 +365,22 @@
           </tbody>
         </table>
         <p>The <code>update</code> request's parameters <strong>must</strong> be sent according to one of these two options:</p>
-        <section id="update-via-post-urlencoded">
-          <h4><code>update</code> via POST with URL-encoded parameters</h4>
+        <div class="div3">
+          <h4><a name="update-via-post-urlencoded" id="update-via-post-urlencoded"></a>2.2.1 <code>update</code> via POST with URL-encoded parameters</h4>
           <p>Protocol clients <strong>may</strong> send update protocol requests via the HTTP POST method by URL encoding the parameters. When using this approach, clients <strong>must</strong> URL
           <a href="http://www.ietf.org/rfc/rfc3986.txt">percent encode</a> [<a href="#rfc3986">RFC3986</a>] all parameters and include them as parameters within the request body via the
           <code>application/x-www-form-urlencoded</code> media type with the name given above. Parameters <strong>must</strong> be separated with the ampersand (<code>&amp;</code>) character. Clients
           may include the parameters in any order. The content type header of the HTTP request <strong>must</strong> be set to <code>application/x-www-form-urlencoded</code>.</p>
-        </section>
-        <section id="update-via-post-direct">
-          <h4><code>update</code> via POST directly</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="update-via-post-direct" id="update-via-post-direct"></a>2.2.2 <code>update</code> via POST directly</h4>
           <p>Protocol clients <strong>may</strong> send update protocol requests via the HTTP POST method by including the update request directly and unencoded as the HTTP request message body. When
           using this approach, clients <strong>must</strong> include the SPARQL update request string, unencoded, and nothing else as the message body of the request. Clients <strong>must</strong>
           set the content type header of the HTTP request to <code>application/sparql-update</code>. Clients <strong>may</strong> include the optional <code>using-graph-uri</code> and
           <code>using-named-graph-uri</code> parameters as HTTP query string parameters in the request URI.</p>
-        </section>
-        <section id="update-dataset">
-          <h4>Specifying an RDF Dataset</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="update-dataset" id="update-dataset"></a>2.2.3 Specifying an RDF Dataset</h4>
           <p>SPARQL Update requests are executed against a Graph Store, a mutable container of RDF graphs managed by a SPARQL service. The <code>WHERE</code> clause of a SPARQL update <a href=
           "http://www.w3.org/TR/sparql11-update/#deleteInsert">DELETE/INSERT operation</a> [<a href="#update">UPDATE</a>] matches against data in an <a href=
           "http://www.w3.org/TR/sparql11-query/#rdfDataset">RDF Dataset</a>, which is a subset of the Graph Store. The RDF Dataset for an update operation may be specified either in the operation
@@ -350,17 +391,17 @@
           <p>A SPARQL Update processor should treat each occurrence of the <code>using-graph-uri=g</code> parameter in an update protocol operation as if a <code>USING &lt;g&gt;</code> clause were
           included for every operation in the SPARQL 1.1 Update request. Similarly, a SPARQL Update processor should treat each occurrence of the <code>using-named-graph-uri=g</code> parameter in an
           update protocol operation as if a <code>USING NAMED &lt;g&gt;</code> clause were included for every operation in the SPARQL 1.1 Update request.</p>
-        </section>
-        <section id="update-success">
-          <h4>Success Responses</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="update-success" id="update-success"></a>2.2.4 Success Responses</h4>
           <p>The SPARQL Protocol uses the response status codes defined in HTTP to indicate the success or failure of an operation. Consult the <a href=
           "http://www.w3.org/Protocols/rfc2616/rfc2616.html">HTTP specification</a> [<a href="#rfc2616">RFC2616</a>] for detailed definitions of each status code. While a protocol service
           <strong>should</strong> use a 2XX HTTP response code for an update request that is successfully processed, it <strong>may</strong> choose instead to use a 3XX response code as per HTTP.</p>
           <p>The response body of a successful update request is implementation defined. Implementations <strong>may</strong> use HTTP content negotiation to provide both human-readable and
           machine-processable information about the completed update request.</p>
-        </section>
-        <section id="update-failure">
-          <h4>Failure Responses</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="update-failure" id="update-failure"></a>2.2.5 Failure Responses</h4>
           <p>The HTTP response code for an unsuccessful update request should be:</p>
           <ul>
             <li>400 if the SPARQL update request string is not a legal sequence of characters in the language defined by the SPARQL Update grammar; or,</li>
@@ -370,18 +411,18 @@
           <p>The response body of a failed update request is implementation defined. Implementations <strong>may</strong> use HTTP content negotiation to provide human-readable or machine-processable
           (or both) information about the failed update request.</p>
           <p>A protocol service <strong>may</strong> use other 4XX or 5XX HTTP response codes for other failure conditions, as per HTTP.</p>
-        </section>
-      </section>
-      <section id="base-iri">
-        <h3>Determining the Base IRI</h3>
+        </div>
+      </div>
+      <div class="div2">
+        <h3><a name="base-iri" id="base-iri"></a>2.3 Determining the Base IRI</h3>
         <p>The <code>BASE</code> keyword in a SPARQL query or a SPARQL update request string defines the Base IRI used to resolve relative IRIs per <a href=
         "http://www.ietf.org/rfc/rfc3986.txt">Uniform Resource Identifier (URI): Generic Syntax</a> [<a href="#rfc3986">RFC3986</a>] section 5.1.1, "Base URI Embedded in Content". The SPARQL Protocol
         does not dereference query URIs so section 5.1.3 does not apply. Finally, per section 5.1.4, SPARQL Protocol services <strong>must</strong> define their own base URI, which
         <strong>may</strong> be the service endpoint.</p>
-      </section>
-    </section>
-    <section id="examples">
-      <h2>Example SPARQL Protocol Requests (informative)</h2>
+      </div>
+    </div>
+    <div class="div1">
+      <h2><a name="examples" id="examples"></a>3 Example SPARQL Protocol Requests (informative)</h2>
       <p>The following HTTP trace examples illustrate invocation of the <code>query</code> and <code>update</code> operations under several different scenarios. Some example traces are abstracted
       from complete HTTP traces in these ways:</p>
       <ol>
@@ -389,16 +430,16 @@
         represents the exact SPARQL query string given in the example without any encoding.</li>
         <li>For <code>query</code> operation examples, only partial response bodies, containing the query results, are displayed.</li>
       </ol>
-      <section id="query-bindings-http-examples">
-        <h3>Examples of SPARQL Query</h3>
-        <section id="select-svcsupplied">
-          <h4>SELECT with service-supplied RDF Dataset</h4>
+      <div class="div2">
+        <h3><a name="query-bindings-http-examples" id="query-bindings-http-examples"></a>3.1 Examples of SPARQL Query</h3>
+        <div class="div3">
+          <h4><a name="select-svcsupplied" id="select-svcsupplied"></a>3.1.1 SELECT with service-supplied RDF Dataset</h4>
           <p>This SPARQL query</p>
           <div id="div-select-svcsupplied">
             <pre class="query">PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt; 
 SELECT ?book ?who 
 WHERE { ?book dc:creator ?who }</pre>
-            <p>is conveyed via HTTP GET to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed via HTTP GET to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
             <pre class="req">
             GET /sparql/?<b>query</b>=PREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%20%0ASELECT%20%3Fbook%20%3Fwho%20%0AWHERE%20%7B%20%3Fbook%20dc%3Acreator%20%3Fwho%20%7D%0A HTTP/1.1
 Host: www.example
@@ -425,21 +466,21 @@ Content-Type: application/sparql-results+xml
 ...
 &lt;/sparql&gt; </pre>
           </div>
-        </section>
-        <section id="select-simple">
-          <h4>SELECT with simple RDF Dataset</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="select-simple" id="select-simple"></a>3.1.2 SELECT with simple RDF Dataset</h4>
           <p>This SPARQL query</p>
           <div id="div-select-simple">
             <pre class="query">PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt; 
 SELECT ?book ?who 
 WHERE { ?book dc:creator ?who }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.other.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <tt>http://www.other.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
             <pre class="req">
             GET /sparql/?<b>query</b>=PREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%20%0ASELECT%20%3Fbook%20%3Fwho%20%0AWHERE%20%7B%20%3Fbook%20dc%3Acreator%20%3Fwho%20%7D%0A&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.other.example%2Fbooks HTTP/1.1
 Host: www.other.example
 User-agent: my-sparql-client/0.1
 </pre>
-            <p>That query — against the RDF Dataset identified by the value of the <code>default-graph-uri</code> parameter, <code>/http://www.other.example/books</code> — executed by that SPARQL query
+            <p>That query — against the RDF Dataset identified by the value of the <code>default-graph-uri</code> parameter, <tt>http://www.other.example/books</tt> — executed by that SPARQL query
             service, returns the following query result:</p>
             <pre class="resp">HTTP/1.1 200 OK
 Date: Fri, 06 May 2005 20:55:12 GMT
@@ -456,9 +497,9 @@ Content-Type: application/sparql-results+xml
 ...
 &lt;/sparql&gt; </pre>
           </div>
-        </section>
-        <section id="construct-simple">
-          <h4>CONSTRUCT with simple RDF dataset and HTTP content negotiation</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="construct-simple" id="construct-simple"></a>3.1.3 CONSTRUCT with simple RDF dataset and HTTP content negotiation</h4>
           <p>This SPARQL query</p>
           <div id="div-construct-simple">
             <pre class="query">PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
@@ -473,7 +514,7 @@ WHERE { ?s ?p ?o. myfoaf:jose foaf:nick "Jo".
               &amp;&amp; ! ( ?s = myfoaf:julia &amp;&amp; ?p = foaf:mbox &amp;&amp; ?o = &lt;mailto:julia@mail.example&gt; )
               &amp;&amp; ! ( ?s = myfoaf:julia &amp;&amp; ?p = rdf:type &amp;&amp; ?o = foaf:Person))
 }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
             <pre class="req">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.example%2Fjose-foaf.rdf HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
@@ -493,17 +534,17 @@ myfoaf:jose foaf:name "Jose Jimeñez";
             foaf:depiction &lt;http://www.example/jose/jose.jpg&gt;;
             foaf:nick "Jo";
 ...</pre>
-            <p><em>Note:</em> registration for the media type <code>/text/turtle</code> was started but not completed at the time of this publication. Please see <a href=
+            <p><em>Note:</em> registration for the media type <tt>text/turtle</tt> was started but not completed at the time of this publication. Please see <a href=
             "http://www.w3.org/TR/turtle">http://www.w3.org/TR/turtle</a> for the final registered media type for the Turtle language.</p>
           </div>
-        </section>
-        <section id="ask-simple">
-          <h4>ASK with simple RDF Dataset</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="ask-simple" id="ask-simple"></a>3.1.4 ASK with simple RDF Dataset</h4>
           <p>This SPARQL query</p>
           <div id="div-ask-simple">
             <pre class="query">PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt; 
 ASK WHERE { ?book dc:creator "J.K. Rowling"}</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
             <pre class="req">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.example%2Fbooks HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
@@ -521,14 +562,14 @@ Content-Type: application/sparql-results+xml
  &lt;boolean&gt;true&lt;/boolean&gt;
 &lt;/sparql&gt;</pre>
           </div>
-        </section>
-        <section id="describe-simple">
-          <h4>DESCRIBE with simple RDF Dataset</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="describe-simple" id="describe-simple"></a>3.1.5 DESCRIBE with simple RDF Dataset</h4>
           <p>This SPARQL query</p>
           <div id="div-describe-simple">
             <pre class="query">PREFIX books: &lt;http://www.example/book/&gt;
 DESCRIBE books:book6</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated here:</p>
+            <p>is conveyed to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated here:</p>
             <pre class="req">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.example%2Fbooks HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
@@ -549,9 +590,9 @@ Content-Type:  application/rdf+xml
   &lt;/rdf:Description&gt;
 &lt;/rdf:RDF&gt;</pre>
           </div>
-        </section>
-        <section id="select-complex">
-          <h4>SELECT with complex RDF Dataset</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="select-complex" id="select-complex"></a>3.1.6 SELECT with complex RDF Dataset</h4>
           <p>This SPARQL query</p>
           <div id="div-select-complex">
             <pre class="query">PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
@@ -585,9 +626,9 @@ Content-Type:  application/sparql-results+xml
 ...
 &lt;/sparql&gt;</pre>
           </div>
-        </section>
-        <section id="select-queryonly">
-          <h4>SELECT with query-only RDF Dataset</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="select-queryonly" id="select-queryonly"></a>3.1.7 SELECT with query-only RDF Dataset</h4>
           <p>This SPARQL query</p>
           <div id="div-select-queryonly">
             <pre class="query">PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
@@ -600,7 +641,7 @@ FROM NAMED &lt;http://www.example/bob&gt;
 WHERE { ?g dc:publisher ?who .
         GRAPH ?g { ?x foaf:mbox ?mbox }
 }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
             <pre class="req">GET /sparql/?<b>query</b>=<i>EncodedQuery</i> HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
@@ -616,9 +657,9 @@ Content-Type: application/sparql-results+xml
 ...
 &lt;/sparql&gt;</pre>
           </div>
-        </section>
-        <section id="select-ambiguous">
-          <h4>SELECT with ambiguous RDF Dataset</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="select-ambiguous" id="select-ambiguous"></a>3.1.8 SELECT with ambiguous RDF Dataset</h4>
           <div id="div-select-ambiguous">
             <p>This SPARQL query</p>
             <pre class="query">PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
@@ -631,7 +672,7 @@ FROM NAMED &lt;http://www.example/susan&gt;
 WHERE { ?g dc:publisher ?who .
         GRAPH ?g { ?x foaf:mbox ?mbox }
 }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
             <pre class="req">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.example%2Fmorepublishers
 &amp;<b>named-graph-uri</b>=http%3A%2F%2Fwww.example%2Fbob&amp;<b>named-graph-uri</b>=http%3A%2F%2Fwww.example%2Falice HTTP/1.1
 Host: www.example
@@ -678,16 +719,16 @@ Content-Type: application/sparql-results+xml
   &lt;/results&gt;
 &lt;/sparql&gt;</pre>
           </div>
-        </section>
-        <section id="select-malformed">
-          <h4>SELECT with malformed query fault</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="select-malformed" id="select-malformed"></a>3.1.9 SELECT with malformed query fault</h4>
           <p>This syntactically invalid SPARQL query</p>
           <div id="div-select-malformed">
             <pre class="query">PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
 SELECT ?name
 WHERE { ?x foaf:name ?name
 ORDER BY ?name }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
             <pre class="req">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.example%2Fmorepublishers HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
@@ -700,9 +741,9 @@ Content-Type: text/plain; charset=UTF-8
 
 4:syntax error, unexpected ORDER, expecting '}'</pre>
           </div>
-        </section>
-        <section id="select-refused">
-          <h4>SELECT with query request refused fault</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="select-refused" id="select-refused"></a>3.1.10 SELECT with query request refused fault</h4>
           <p>This SPARQL query</p>
           <div id="div-select-refused">
             <pre class="query">PREFIX bio: &lt;http://bio.example/schema/#&gt;
@@ -710,7 +751,7 @@ SELECT ?valence
 FROM &lt;http://another.example/protein-db.rdf&gt;
 WHERE { ?x bio:protein ?valence }
 ORDER BY ?valence</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
             <pre class="req">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fanother.example%2Fprotein-db.rdf HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
@@ -727,9 +768,9 @@ Your request could not be processed because http://another.example/protein-db.rd
 could not be retrieved within the time alloted.
 </pre>
           </div>
-        </section>
-        <section id="select-longpost">
-          <h4>Long SELECT query using POST with URL encoding</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="select-longpost" id="select-longpost"></a>3.1.11 Long SELECT query using POST with URL encoding</h4>
           <p>Some SPARQL queries, perhaps machine generated, may be longer than can be reliably conveyed by way of the HTTP GET binding described in <a href="#query-via-get">2.1.1 query via GET</a>.
           In those cases the POST binding described in <a href="#query-via-post-urlencoded">2.1.2 query via POST with URL-encoded parameters</a> may be used. This SPARQL query</p>
           <div id="div-select-longpost">
@@ -893,7 +934,7 @@ WHERE {
          :uid "D6042EDF-C1C9-11D6-9446-003065F198AC" .
     }
 }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
             <pre class="req">POST /sparql/ HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
@@ -938,11 +979,11 @@ Content-Type: application/sparql-results+xml
     &lt;/results&gt;
 &lt;/sparql&gt;</pre>
           </div>
-        </section>
-        <section id="select-longpost-direct">
-          <h4>Long SELECT query using direct POST</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="select-longpost-direct" id="select-longpost-direct"></a>3.1.12 Long SELECT query using direct POST</h4>
           <p>SPARQL queries may also be POSTed directly without URL encoding, as described in <a href="#query-via-post-direct">2.1.3 query via POST directly</a>. The same query used in the <a href=
-          "#select-longpost">previous example</a> is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+          "#select-longpost">previous example</a> is conveyed to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
           <pre class="req">POST /sparql/?default-graph-uri=http%3A%2F%2Fanother.example%2Fcalendar.rdf HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
@@ -950,16 +991,16 @@ Content-Type: application/sparql-query
 
 <i>UnencodedQuery</i></pre>
           <p>With the same response as in the previous example.</p>
-        </section>
-        <section id="select-kanji">
-          <h4>SELECT with internationalization</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="select-kanji" id="select-kanji"></a>3.1.13 SELECT with internationalization</h4>
           <p>SPARQL queries may include internationalized characters or character sets. This SPARQL query</p>
           <div id="div-select-kanji">
             <pre class="query">PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
 PREFIX 食: &lt;http://www.w3.org/2001/sw/DataAccess/tests/data/i18n/kanji.ttl#&gt;
 SELECT ?name ?food 
 WHERE { [ foaf:name ?name ; 食:食べる ?food ] . }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <tt>http://www.example/sparql/</tt>, as illustrated in this HTTP trace:</p>
             <pre class="req">
             GET /sparql/?<b>query=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20%E9%A3%9F%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2Fsw%2FDataAccess%2Ftests%2Fdata%2Fi18n%2Fkanji.ttl%23%3E%0ASELECT%20%3Fname%20%3Ffood%20%0AWHERE%20%7B%20%5B%20foaf%3Aname%20%3Fname%20%3B%20%E9%A3%9F%3A%E9%A3%9F%E3%81%B9%E3%82%8B%20%3Ffood%20%5D%20.%20%7D</b>
 Host: www.example
@@ -975,12 +1016,12 @@ Content-Type: application/sparql-results+xml
 ...
 &lt;/sparql&gt;</pre>
           </div>
-        </section>
-      </section>
-      <section id="update-bindings-http-examples">
-        <h3>Examples of SPARQL Update</h3>
-        <section id="update-urlencoded-simple">
-          <h4>UPDATE using URL-encoded parameters</h4>
+        </div>
+      </div>
+      <div class="div2">
+        <h3><a name="update-bindings-http-examples" id="update-bindings-http-examples"></a>3.2 Examples of SPARQL Update</h3>
+        <div class="div3">
+          <h4><a name="update-urlencoded-simple" id="update-urlencoded-simple"></a>3.2.1 UPDATE using URL-encoded parameters</h4>
           <p>An example request, which is a serialisation of a request sent to <code>http://localhost:8888/test</code> for the query <code>INSERT DATA { &lt;a&gt; &lt;p&gt; &lt;b&gt; }</code> is
           shown below using the URL-encoded parameter form.</p>
           <pre class="req">POST /test HTTP/1.1
@@ -991,9 +1032,9 @@ Content-Type: application/x-www-form-urlencoded
 
 update=INSERT%20DATA%20%7B%20%3Ca%3E%20%3Cp%3E%20%3Cb%3E%20%7D
 </pre>
-        </section>
-        <section id="update-direct-simple">
-          <h4>UPDATE using POST directly</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="update-direct-simple" id="update-direct-simple"></a>3.2.2 UPDATE using POST directly</h4>
           <p>Update requests may be sent as a POST request with a Content-Type of <code>application/sparql-update</code>:</p>
           <pre class="req">POST /test HTTP/1.1
 Host: localhost:8888
@@ -1002,9 +1043,9 @@ Content-Type: application/sparql-update
 Content-Length: 27
 
 INSERT DATA { &lt;a&gt; &lt;p&gt; &lt;b&gt; }</pre>
-        </section>
-        <section id="update-direct-simple-dataset">
-          <h4>UPDATE specifying dataset and using POST directly</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="update-direct-simple-dataset" id="update-direct-simple-dataset"></a>3.2.3 UPDATE specifying dataset and using POST directly</h4>
           <p>A dataset for an update request may be specified using the <code>using-graph-uri</code> and <code>using-named-graph-uri</code> parameters. The serialisation of an example request sent to
           <code>http://localhost:8888/test</code> and specifying a dataset with default graph <code>http://localhost:8888/people</code> is shown below.</p>
           <pre class="req">POST /test?using-graph-uri=http%3A%2F%2Flocalhost%3A8888%2Fpeople HTTP/1.1
@@ -1016,9 +1057,9 @@ Content-Length: 136
 PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
 DELETE { ?person ?property ?value }
 WHERE { ?person ?property ?value ; foaf:givenName 'Fred' }</pre>
-        </section>
-        <section id="update-urlencoded-multi">
-          <h4>Multi-operation UPDATE using URL-encoded parameters</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="update-urlencoded-multi" id="update-urlencoded-multi"></a>3.2.4 Multi-operation UPDATE using URL-encoded parameters</h4>
           <p>A sequence of multiple operations may be included in a single request, separated by a ';' (semicolon). The serialisation of an example request sent to
           <code>http://localhost:8888/test</code> for the query</p>
           <pre class="query">DELETE DATA { &lt;a&gt; &lt;p&gt; &lt;old&gt; } ;
@@ -1031,9 +1072,9 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 130
 
 update=DELETE%20DATA%20%7B%20%3Ca%3E%20%3Cp%3E%20%3Cold%3E%20%7D%20%3B%0AINSERT%20DATA%20%7B%20%3Ca%3E%20%3Cp%3E%20%3Cnew%3E%20%7D</pre>
-        </section>
-        <section id="update-urlencoded-multi-dataset">
-          <h4>Multi-operation UPDATE specifying dataset and using URL-encoded parameters</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="update-urlencoded-multi-dataset" id="update-urlencoded-multi-dataset"></a>3.2.5 Multi-operation UPDATE specifying dataset and using URL-encoded parameters</h4>
           <p>When POSTing an update request with URL-encoded parameters, the dataset parameters <code>using-graph-uri</code> and <code>using-named-graph-uri</code> are specified in the POST body with
           the serialized request. The serialisation of an example request sent to <code>http://localhost:8888/test</code> for the query</p>
           <pre class="query">PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
@@ -1048,9 +1089,9 @@ Content-Length: 130
 
 using-named-graph-uri=http%3A%2F%2Flocalhost%3A8888%2Falice%2Ffoaf.rdf&amp;using-named-graph-uri=http%3A%2F%2Flocalhost%3A8888%2Feve%2Ffoaf.rdf&amp;update=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0AINSERT%20%7B%20GRAPH%20%3Chttp%3A%2F%2Flocalhost%3A8888%2Fpeople%3E%20%7B%20%3Fperson%20%3Fproperty%20%3Fvalue%20%7D%20%7D%0AWHERE%20%7B%20GRAPH%20%3Fg%20%7B%20%3Fperson%20%3Fproperty%20%3Fvalue%20%3B%20foaf%3AgivenName%20%27Fred%27%20%7D%20%7D
 </pre>
-        </section>
-        <section id="update-direct-multi-dataset">
-          <h4>Multi-operation UPDATE specifying dataset and using POST directly</h4>
+        </div>
+        <div class="div3">
+          <h4><a name="update-direct-multi-dataset" id="update-direct-multi-dataset"></a>3.2.6 Multi-operation UPDATE specifying dataset and using POST directly</h4>
           <p>The serialisation of an example request sent to <code>http://localhost:8888/test</code> and specifying a dataset with the named graphs <code>http://localhost:8888/alice/foaf.rdf</code>
           and <code>http://localhost:8888/eve/foaf.rdf</code> is shown below.</p>
           <pre class="req">POST /test?using-named-graph-uri=http%3A%2F%2Flocalhost%3A8888%2Falice%2Ffoaf.rdf&amp;using-named-graph-uri=http%3A%2F%2Flocalhost%3A8888%2Feve%2Ffoaf.rdf HTTP/1.1
@@ -1062,13 +1103,13 @@ Content-Length: 190
 PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
 INSERT { GRAPH &lt;http://localhost:8888/people&gt; { ?person ?property ?value } }
 WHERE { GRAPH ?g { ?person ?property ?value ; foaf:givenName 'Fred' } }</pre>
-        </section>
-      </section>
-    </section>
-    <section id="policy">
-      <h2>Policy Considerations</h2>
-      <section id="policy-security">
-        <h3>Security</h3>
+        </div>
+      </div>
+    </div>
+    <div class="div1">
+      <h2><a name="policy" id="policy"></a>4 Policy Considerations</h2>
+      <div class="div2">
+        <h3><a name="policy-security" id="policy-security"></a>4.1 Security</h3>
         <p>There are at least two possible sources of denial-of-service attacks against SPARQL protocol services. First, under-constrained queries can result in very large numbers of results, which
         may require large expenditures of computing resources to process, assemble, or return. Another possible source are queries containing very complex — either because of resource size, the
         number of resources to be retrieved, or a combination of size and number — RDF Dataset descriptions, which the service may be unable to assemble without significant expenditure of resources,
@@ -1090,10 +1131,10 @@ WHERE { GRAPH ?g { ?person ?property ?value ; foaf:givenName 'Fred' } }</pre>
         WITH ACUTE). Users of SPARQL must take care to construct queries with IRIs that match the IRIs in the data. Further information about matching of similar characters can be found in <a href=
         "http://www.unicode.org/reports/tr36/">Unicode Security Considerations</a> [<a href="#unisec">UNISEC</a>] and <a href="http://www.ietf.org/rfc/rfc3987.txt">Internationalized Resource
         Identifiers (IRIs)</a> [<a href="#rfc3987">RFC3987</a>] Section 8.</p>
-      </section>
-    </section>
-    <section id="conformance">
-      <h2>Conformance</h2>
+      </div>
+    </div>
+    <div class="div1">
+      <h2><a name="conformance" id="conformance"></a>5 Conformance</h2>
       <p>The status of the parts of SPARQL 1.1 Protocol (this document) is as follows:</p>
       <ul>
         <li>Section 1 Introduction: <strong>normative</strong></li>
@@ -1105,16 +1146,16 @@ WHERE { GRAPH ?g { ?person ?property ?value ; foaf:givenName 'Fred' } }</pre>
         <li>Section A.1: Normative References: <strong>normative</strong></li>
         <li>Section A.2: Other References: <strong>informative</strong></li>
       </ul>
-      <p>A <span class="doc-ref" id="conformant-sparql-protocol-service">conformant SPARQL Protocol service</span>:</p>
+      <p>A <a name="conformant-sparql-protocol-service" id="conformant-sparql-protocol-service">conformant SPARQL Protocol service</a>:</p>
       <ol>
         <li><strong>must</strong> implement either the <code>query</code> operation or the <code>update</code> operation in the way described in this document ("SPARQL 1.1 Protocol");</li>
         <li><strong>may</strong> implement both the <code>query</code> and <code>update</code> operations;</li>
         <li><strong>must</strong> be consistent with the normative constraints (indicated by [<a href="#rfc2119">RFC2119</a>] keywords) described in <a href="#policy">4. Policy
         Considerations</a>.</li>
       </ol>
-    </section>
-    <section id="changes">
-      <h2>Changes Since Previous Recommendation (Informative)</h2>
+    </div>
+    <div class="div1">
+      <h2><a name="changes" id="changes"></a>6 Changes Since Previous Recommendation (Informative)</h2>
       <p>This specification extends and updates the <a href="http://www.w3.org/TR/2008/REC-rdf-sparql-protocol-20080115/">SPARQL Protocol for RDF of January, 2008</a>. The significant changes
       are:</p>
       <ul>
@@ -1124,71 +1165,67 @@ WHERE { GRAPH ?g { ?person ?property ?value ; foaf:givenName 'Fred' } }</pre>
         <li>Relaxed the requirements on specific HTTP response codes to allow for other codes as long as they align with HTTP semantics</li>
         <li>Added a variant of the query operation that directly posts a query string in the body of a POST request</li>
       </ul>
-    </section>
-    <section id="sec-bibliography">
-      <h2>References</h2>
-      <section id="sec-existing-stds">
-        <h3>Normative References</h3>
+    </div>
+  </div>
+  <div class="back">
+    <div class="div1">
+      <h2><a name="sec-bibliography" id="sec-bibliography"></a>A References</h2>
+      <div class="div2">
+        <h3><a name="sec-existing-stds" id="sec-existing-stds"></a>A.1 Normative References</h3>
         <dl class="bib">
-          <dt><span class="doc-ref" id="sparql">[SPARQL]</span></dt>
+          <dt><a name="sparql" id="sparql">[SPARQL]</a></dt>
           <dd><cite><a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321">SPARQL 1.1 Query Language</a></cite>, S. Harris, A. Seaborne, Editors, W3C Recommendation, 21 March 2013,
           http://www.w3.org/TR/2013/REC-sparql11-query-20130321. <a href="http://www.w3.org/TR/sparql11-query/" title="Latest version of SPARQL 1.1 Query Language">Latest version</a> available at
           http://www.w3.org/TR/sparql11-query.</dd>
-          <dt><span class="doc-ref" id="update">[UPDATE]</span></dt>
+          <dt><a name="update" id="update">[UPDATE]</a></dt>
           <dd><cite><a href="http://www.w3.org/TR/2013/REC-sparql11-update-20130321">SPARQL 1.1 Update</a></cite>, P. Gearon, A. Passant, A. Polleres, Editors, W3C Recommendation, 21 March 2013,
           http://www.w3.org/TR/2013/REC-sparql11-update-20130321. <a href="http://www.w3.org/TR/sparql11-update/" title="Latest version of SPARQL 1.1 Update">Latest version</a> available at
           http://www.w3.org/TR/sparql11-update.</dd>
-          <dt><span class="doc-ref" id="rdf-concepts">[RDF-CONCEPTS]</span></dt>
+          <dt><a name="rdf-concepts" id="rdf-concepts">[RDF-CONCEPTS]</a></dt>
           <dd><a href="http://www.w3.org/TR/rdf-concepts/">Resource Description Framework (RDF): Concepts and Abstract Syntax</a>, Graham Klyne, Jeremy J. Carroll, Editors, W3C (World Wide Web
           Consortium), 2004, http://www.w3.org/TR/rdf-concepts/ .</dd>
-          <dt><span class="doc-ref" id="rdf-xml">[RDF-XML]</span></dt>
+          <dt><a name="rdf-xml" id="rdf-xml">[RDF-XML]</a></dt>
           <dd><a href="http://www.w3.org/TR/rdf-syntax-grammar/">RDF/XML Syntax Specification (Revised)</a>, Dave Beckett, Editor, W3C (World Wide Web Consortium), 2004,
           http://www.w3.org/TR/rdf-syntax-grammar/ .</dd>
-          <dt><span class="doc-ref" id="rfc2119">[RFC2119]</span></dt>
+          <dt><a name="rfc2119" id="rfc2119">[RFC2119]</a></dt>
           <dd><a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119: Key words for use in RFCs to Indicate Requirement Levels</a>, Scott Bradner, Editor, IETF (Internet Engineering Task Force),
           1997, http://www.ietf.org/rfc/rfc2119.txt .</dd>
-          <dt><span class="doc-ref" id="rfc2616">[RFC2616]</span></dt>
+          <dt><a name="rfc2616" id="rfc2616">[RFC2616]</a></dt>
           <dd><a href="http://www.ietf.org/rfc/rfc2616.txt">RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1</a>, R. Fielding, et al., Editors, IETF (Internet Engineering Task Force), 1999,
           http://www.ietf.org/rfc/rfc2616.txt .</dd>
-          <dt><span class="doc-ref" id="rfc3986">[RFC3986]</span></dt>
+          <dt><a name="rfc3986" id="rfc3986">[RFC3986]</a></dt>
           <dd><a href="http://www.ietf.org/rfc/rfc3986.txt">RFC 3986: Uniform Resource Identifier (URI): Generic Syntax</a>, T. Berners-Lee, R. Fielding, L. Masinter, Editors, IETF (Internet
           Engineering Task Force), 2005, http://www.ietf.org/rfc/rfc3986.txt .</dd>
         </dl>
-      </section>
-      <section id="sec-other-references">
-        <h3>Other References</h3>
+      </div>
+      <div class="div2">
+        <h3><a name="sec-other-references" id="sec-other-references"></a>A.2 Other References</h3>
         <dl>
-          <dt><span class="doc-ref" id="rfc3987">[RFC3987]</span></dt>
+          <dt><a name="rfc3987" id="rfc3987">[RFC3987]</a></dt>
           <dd><a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers (IRIs)</a>, M. Duerst, M. Suignard, Editors, IETF (Internet Engineering Task Force), 2005,
           http://www.ietf.org/rfc/rfc3987.txt .</dd>
-          <dt><span class="doc-ref" id="unisec">[UNISEC]</span></dt>
+          <dt><a name="unisec" id="unisec">[UNISEC]</a></dt>
           <dd><a href="http://www.unicode.org/reports/tr36/">Unicode Security Considerations</a>, Mark Davis, Michel Suignard, Editors, 2010, http://www.unicode.org/reports/tr36/</dd>
         </dl>
-      </section>
-    </section>
-    
-<!-- BODY -->
-    <section id="privacy">
-      <h2>Privacy Considerations</h2>
-      <p>TODO</p>
-    </section>
-
-    <section id="security">
-      <h2>Security Considerations</h2>
-      <p>TODO</p>
-    </section>
-
-    <section id="internationalization">
-      <h2>Internationalization Considerations</h2>
-      <p>TODO</p>                
-    </section>
-
-    <section class="appendix informative" id="changes-from-sparql11">
-      <h2>Change Log</h2>
-      <p>TODO</p>
-    </section>   
-
-    <section id="index"></section>
-
-  </body>
+      </div>
+    </div>
+    <div>
+      <h2 id="changelog">Change Log</h2>
+      <h3 id="changes-since-pr">Changes since Proposed Recommendation</h3>
+      <ul>
+        <li>None</li>
+      </ul>
+      <h3 id="changes-since-cr">Changes since Candidate Recommendation</h3>
+      <ul>
+        <li>Fixed typo when referencing the application/x-www-form-urlencoded media type.</li>
+      </ul>
+      <h3 id="changes-since-lc">Changes since Last Call</h3>
+      <ul>
+        <li>Changed error example to use text/plain instead of text/html.</li>
+      </ul>
+    </div>
+  </div>
+  <script type="text/javascript" async src="SPARQL%201.1%20Protocol_files/matomo.js"></script>
+  <script type="application/javascript" src="SPARQL%201.1%20Protocol_files/fixup.js"></script>
+</body>
 </html>

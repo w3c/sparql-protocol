@@ -31,8 +31,10 @@
         previousPublishDate:  "2013-03-21",
         previousMaturity:     "REC",
         
-         editors: [
-           { name: "RDF Star Working Group" }
+        editors: [ 
+           { name: "Andy Seaborne", w3cid: "29909"},
+           { name: "Ruben Taelman", w3cid: "84199"},
+           { name: "Gregory Williams", w3cid: "38870"},
          ],
         formerEditors: [
           { name: "Lee Feigenbaum" },
@@ -47,7 +49,7 @@
       };
     </script>
 
-    <style type="text/css">
+    <style>
       @import url("local.css");
 
       /* ReSpec */
@@ -106,10 +108,7 @@
       </p>
     </section>
 
-    <!--
-        @@ Includes too much - all RDF documents.
-    <section id="related" data-include="./common/related.html"></section>
-    -->
+    <section id="related" data-include="./common/sparql-related.html"></section>
 
     <section id="sparql12-documents" class="introductory">
       <h2>SPARQL 1.2 Documents</h2>
@@ -183,7 +182,7 @@
         "http://www.w3.org/TR/sparql11-results-csv-tsv/">SPARQL CSV/TSV Results Format</a>, or an RDF serialization, depending on the <a href="http://www.w3.org/TR/sparql11-query/#QueryForms">query
         form</a> [<a href="#sparql">SPARQL</a>] and <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html">content negotiation</a> [<a href="#rfc2616">RFC2616</a>].</p><a name=
         "query-summary" id="query-summary"></a>
-        <table style="margin-left: auto; margin-right: auto; border-color: rgb(0, 0, 0); border-collapse: collapse;" cellpadding="5" border="1">
+        <table style="margin-left: auto; margin-right: auto; border-color: rgb(0, 0, 0); border-collapse: collapse; padding: 5px; border: 1px">
           <tbody>
             <tr>
               <th>&nbsp;</th>
@@ -294,7 +293,7 @@
         for this operation <strong>must</strong> include exactly one SPARQL update request string (parameter name: <code>update</code>) and <strong>may</strong> include zero or more default graph
         URIs (parameter name: <code>using-graph-uri</code>) and named graph URIs (parameter name: <code>using-named-graph-uri</code>). The response to an update request indicates success or failure
         of the request via HTTP response status code.</p><span class="doc-ref" id="update-summary"></span>
-        <table style="margin-left: auto; margin-right: auto; border-color: rgb(0, 0, 0); border-collapse: collapse;" cellpadding="5" border="1">
+        <table style="margin-left: auto; margin-right: auto; border-color: rgb(0, 0, 0); border-collapse: collapse; padding: 5px; border: 1px">
           <tbody>
             <tr>
               <th>&nbsp;</th>

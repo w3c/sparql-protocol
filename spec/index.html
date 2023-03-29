@@ -430,14 +430,16 @@ span.cancast:hover { background-color: #ffa;
       </ul>
       <p>The SPARQL 1.1 Protocol is built on top of HTTP. All HTTP requirements for requests and responses <strong>must</strong> be followed.</p>
       <section id="query-operation">
-        <h3><code>query</code> operation</h3>
+        <h3>Query Operation</h3>
         <p>The <code>query</code> operation is used to send a SPARQL query to a service and receive the results of the query. The query operation <strong>MUST</strong> be invoked with either the HTTP
-        GET or HTTP POST method. Client requests for this operation <strong>must</strong> include exactly one SPARQL query string (parameter name: <code>query</code>) and <strong>may</strong> include
-        zero or more default graph URIs (parameter name: <code>default-graph-uri</code>) and named graph URIs (parameter name: <code>named-graph-uri</code>). The response to a query request is either
-        the <a href="http://www.w3.org/TR/rdf-sparql-XMLres/">SPARQL XML Results Format</a>, the <a href="http://www.w3.org/TR/sparql11-results-json/">SPARQL JSON Results Format</a>, the <a href=
-        "http://www.w3.org/TR/sparql11-results-csv-tsv/">SPARQL CSV/TSV Results Format</a>, or an RDF serialization, depending on the <a href="http://www.w3.org/TR/sparql11-query/#QueryForms">query
-        form</a> [<a href="#sparql">SPARQL</a>] and <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html">content negotiation</a> [<a href="#rfc2616">RFC2616</a>].</p><a name=
-        "query-summary" id="query-summary"></a>
+          GET or HTTP POST method. Client requests for this operation <strong>must</strong> include exactly one SPARQL query string (parameter name: <code>query</code>) and <strong>may</strong> include
+          zero or more default graph URIs (parameter name: <code>default-graph-uri</code>) and named graph URIs (parameter name: <code>named-graph-uri</code>). The response to a query request is either
+          the <a href="http://www.w3.org/TR/rdf-sparql-XMLres/">SPARQL XML Results Format</a>, the <a href="http://www.w3.org/TR/sparql11-results-json/">SPARQL JSON Results Format</a>, the 
+          <a href="http://www.w3.org/TR/sparql11-results-csv-tsv/">SPARQL CSV/TSV Results Format</a>, or an RDF serialization, depending on the 
+          <a href="http://www.w3.org/TR/sparql11-query/#QueryForms">query form</a> [<a href="#sparql">SPARQL</a>] and 
+          <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec12.html">content negotiation</a> [<a href="#rfc2616">RFC2616</a>].
+        </p>
+        <span class="doc-ref" id="query-summary"></span>
         <table style="margin-left: auto; margin-right: auto; border-color: rgb(0, 0, 0); border-collapse: collapse; padding: 5px; border: 1px">
           <tbody>
             <tr>
@@ -544,11 +546,13 @@ span.cancast:hover { background-color: #ffa;
         </section>
       </section>
       <section id="update-operation">
-        <h3><code>update</code> operation</h3>
-        <p>The <code>update</code> operation is used to send a SPARQL update request to a service. The update operation <strong>must</strong> be invoked using the HTTP POST method. Client requests
-        for this operation <strong>must</strong> include exactly one SPARQL update request string (parameter name: <code>update</code>) and <strong>may</strong> include zero or more default graph
-        URIs (parameter name: <code>using-graph-uri</code>) and named graph URIs (parameter name: <code>using-named-graph-uri</code>). The response to an update request indicates success or failure
-        of the request via HTTP response status code.</p><span class="doc-ref" id="update-summary"></span>
+        <h3>Update Operation</h3>
+        <p>
+          The <code>update</code> operation is used to send a SPARQL update request to a service. The update operation <strong>must</strong> be invoked using the HTTP POST method. Client requests
+          for this operation <strong>must</strong> include exactly one SPARQL update request string (parameter name: <code>update</code>) and <strong>may</strong> include zero or more default graph
+          URIs (parameter name: <code>using-graph-uri</code>) and named graph URIs (parameter name: <code>using-named-graph-uri</code>). The response to an update request indicates success or failure
+          of the request via HTTP response status code.</p>
+        <span class="doc-ref" id="update-summary"></span>
         <table style="margin-left: auto; margin-right: auto; border-color: rgb(0, 0, 0); border-collapse: collapse; padding: 5px; border: 1px">
           <tbody>
             <tr>

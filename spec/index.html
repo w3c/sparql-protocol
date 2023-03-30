@@ -387,13 +387,13 @@ span.cancast:hover { background-color: #ffa;
 <!-- BODY -->
     <section id="intro">
       <h2>Introduction</h2>
-      <p>This document describes the SPARQL 1.1 Protocol, a means of conveying SPARQL queries and updates from clients to SPARQL processors. The SPARQL Protocol has been designed for compatibility
-      with the <a href="http://www.w3.org/TR/sparql11-query/">SPARQL 1.1 Query Language</a> [<a href="#sparql">SPARQL</a>] and with the <a href="http://www.w3.org/TR/sparql11-update/">SPARQL 1.1
+      <p>This document describes the SPARQL 1.2 Protocol, a means of conveying SPARQL queries and updates from clients to SPARQL processors. The SPARQL Protocol has been designed for compatibility
+      with the <a href="http://www.w3.org/TR/sparql11-query/">SPARQL 1.2 Query Language</a> [<a href="#sparql">SPARQL</a>] and with the <a href="http://www.w3.org/TR/sparql11-update/">SPARQL 1.2
       Update Language for RDF</a>. This document is primarily intended for software developers interested in implementing SPARQL query and update services and clients.</p>
       <p>The SPARQL Protocol consists of two HTTP operations: a <a href="#query-operation">query operation</a> for performing SPARQL Query Language queries and an <a href="#update-operation">update
       operation</a> for performing SPARQL Update Language requests. SPARQL Protocol clients send HTTP requests to SPARQL Protocol services that handle the request and send HTTP responses back to the
       originating client.</p>
-      <p>A separate document describes the <a href="http://www.w3.org/TR/sparql11-http-rdf-update/">SPARQL 1.1 Graph Store HTTP Protocol</a> which describes the use of HTTP operations for the purpose
+      <p>A separate document describes the <a href="http://www.w3.org/TR/sparql11-http-rdf-update/">SPARQL 1.2 Graph Store HTTP Protocol</a> which describes the use of HTTP operations for the purpose
       of managing a collection of graphs in the REST architectural style.</p>
       <section id="conventions">
         <h3>Document Conventions</h3>
@@ -415,7 +415,7 @@ span.cancast:hover { background-color: #ffa;
           <dt>SPARQL Protocol operation</dt>
           <dd>An HTTP request and response that conform to the protocol defined in this document.</dd>
           <dt>RDF Dataset</dt>
-          <dd>A collection of a default graph and zero or more named graphs, as defined by the <a href="http://www.w3.org/TR/sparql11-query/#rdfDataset">SPARQL 1.1 Query Language</a>.</dd>
+          <dd>A collection of a default graph and zero or more named graphs, as defined by the <a href="http://www.w3.org/TR/sparql11-query/#rdfDataset">SPARQL 1.2 Query Language</a>.</dd>
         </dl>
       </section>
     </section>
@@ -428,7 +428,7 @@ span.cancast:hover { background-color: #ffa;
         <li>The message content included in the HTTP request body.</li>
         <li>The message content included in the HTTP response body.</li>
       </ul>
-      <p>The SPARQL 1.1 Protocol is built on top of HTTP. All HTTP requirements for requests and responses <strong>must</strong> be followed.</p>
+      <p>The SPARQL 1.2 Protocol is built on top of HTTP. All HTTP requirements for requests and responses <strong>must</strong> be followed.</p>
       <section id="query-operation">
         <h3>Query Operation</h3>
         <p>The <code>query</code> operation is used to send a SPARQL query to a service and receive the results of the query. The query operation <strong>MUST</strong> be invoked with either the HTTP
@@ -604,11 +604,11 @@ span.cancast:hover { background-color: #ffa;
           "http://www.w3.org/TR/sparql11-query/#rdfDataset">RDF Dataset</a>, which is a subset of the Graph Store. The RDF Dataset for an update operation may be specified either in the operation
           string itself using the <code>USING</code>, <code>USING NAMED</code>, and/or <code>WITH</code> keywords, or it may be specified via the <code>using-graph-uri</code> and
           <code>using-named-graph-uri</code> parameters.</p>
-          <p>It is an error to supply the <code>using-graph-uri</code> or <code>using-named-graph-uri</code> parameters when using this protocol to convey a SPARQL 1.1 Update request that contains an
+          <p>It is an error to supply the <code>using-graph-uri</code> or <code>using-named-graph-uri</code> parameters when using this protocol to convey a SPARQL 1.2 Update request that contains an
           operation that uses the <code>USING</code>, <code>USING NAMED</code>, or <code>WITH</code> clause.</p>
           <p>A SPARQL Update processor should treat each occurrence of the <code>using-graph-uri=g</code> parameter in an update protocol operation as if a <code>USING &lt;g&gt;</code> clause were
-          included for every operation in the SPARQL 1.1 Update request. Similarly, a SPARQL Update processor should treat each occurrence of the <code>using-named-graph-uri=g</code> parameter in an
-          update protocol operation as if a <code>USING NAMED &lt;g&gt;</code> clause were included for every operation in the SPARQL 1.1 Update request.</p>
+          included for every operation in the SPARQL 1.2 Update request. Similarly, a SPARQL Update processor should treat each occurrence of the <code>using-named-graph-uri=g</code> parameter in an
+          update protocol operation as if a <code>USING NAMED &lt;g&gt;</code> clause were included for every operation in the SPARQL 1.2 Update request.</p>
         </section>
         <section id="update-success">
           <h4>Success Responses</h4>
@@ -1353,7 +1353,7 @@ WHERE { GRAPH ?g { ?person ?property ?value ; foaf:givenName 'Fred' } }</pre>
     </section>
     <section id="conformance">
       <h2>Conformance</h2>
-      <p>The status of the parts of SPARQL 1.1 Protocol (this document) is as follows:</p>
+      <p>The status of the parts of SPARQL 1.2 Protocol (this document) is as follows:</p>
       <ul>
         <li>Section 1 Introduction: <strong>normative</strong></li>
         <li>Section 2 SPARQL Protocol Operations: <strong>normative</strong></li>
@@ -1366,7 +1366,7 @@ WHERE { GRAPH ?g { ?person ?property ?value ; foaf:givenName 'Fred' } }</pre>
       </ul>
       <p>A <span class="doc-ref" id="conformant-sparql-protocol-service">conformant SPARQL Protocol service</span>:</p>
       <ol>
-        <li><strong>must</strong> implement either the <code>query</code> operation or the <code>update</code> operation in the way described in this document ("SPARQL 1.1 Protocol");</li>
+        <li><strong>must</strong> implement either the <code>query</code> operation or the <code>update</code> operation in the way described in this document ("SPARQL 1.2 Protocol");</li>
         <li><strong>may</strong> implement both the <code>query</code> and <code>update</code> operations;</li>
         <li><strong>must</strong> be consistent with the normative constraints (indicated by [<a href="#rfc2119">RFC2119</a>] keywords) described in <a href="#policy">4. Policy
         Considerations</a>.</li>
@@ -1390,12 +1390,12 @@ WHERE { GRAPH ?g { ?person ?property ?value ; foaf:givenName 'Fred' } }</pre>
         <h3>Normative References</h3>
         <dl class="bib">
           <dt><span class="doc-ref" id="sparql">[SPARQL]</span></dt>
-          <dd><cite><a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321">SPARQL 1.1 Query Language</a></cite>, S. Harris, A. Seaborne, Editors, W3C Recommendation, 21 March 2013,
-          http://www.w3.org/TR/2013/REC-sparql11-query-20130321. <a href="http://www.w3.org/TR/sparql11-query/" title="Latest version of SPARQL 1.1 Query Language">Latest version</a> available at
+          <dd><cite><a href="http://www.w3.org/TR/2013/REC-sparql11-query-20130321">SPARQL 1.2 Query Language</a></cite>, S. Harris, A. Seaborne, Editors, W3C Recommendation, 21 March 2013,
+          http://www.w3.org/TR/2013/REC-sparql11-query-20130321. <a href="http://www.w3.org/TR/sparql11-query/" title="Latest version of SPARQL 1.2 Query Language">Latest version</a> available at
           http://www.w3.org/TR/sparql11-query.</dd>
           <dt><span class="doc-ref" id="update">[UPDATE]</span></dt>
-          <dd><cite><a href="http://www.w3.org/TR/2013/REC-sparql11-update-20130321">SPARQL 1.1 Update</a></cite>, P. Gearon, A. Passant, A. Polleres, Editors, W3C Recommendation, 21 March 2013,
-          http://www.w3.org/TR/2013/REC-sparql11-update-20130321. <a href="http://www.w3.org/TR/sparql11-update/" title="Latest version of SPARQL 1.1 Update">Latest version</a> available at
+          <dd><cite><a href="http://www.w3.org/TR/2013/REC-sparql11-update-20130321">SPARQL 1.2 Update</a></cite>, P. Gearon, A. Passant, A. Polleres, Editors, W3C Recommendation, 21 March 2013,
+          http://www.w3.org/TR/2013/REC-sparql11-update-20130321. <a href="http://www.w3.org/TR/sparql11-update/" title="Latest version of SPARQL 1.2 Update">Latest version</a> available at
           http://www.w3.org/TR/sparql11-update.</dd>
           <dt><span class="doc-ref" id="rdf-concepts">[RDF-CONCEPTS]</span></dt>
           <dd><a href="http://www.w3.org/TR/rdf-concepts/">Resource Description Framework (RDF): Concepts and Abstract Syntax</a>, Graham Klyne, Jeremy J. Carroll, Editors, W3C (World Wide Web

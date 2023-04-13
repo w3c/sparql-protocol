@@ -1214,7 +1214,7 @@ Content-Type: application/sparql-results+xml
 PREFIX ex: &lt;http://example.org/&gt;
 SELECT ?name ?person
 WHERE { &lt;&lt; _:a foaf:name ?name &gt;&gt; ex:statedBy ?person . }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20ex%3A%20%3Chttp%3A%2F%2Fexample.org%2F%3E%0ASELECT%20%3Fname%20%3Fperson%20%0AWHERE%20%7B%20%3C%3C%20_%3Aa%20foaf%3Aname%20%3Fname%20%3E%3E%20ex%3AstatedBy%20%3Fperson%20.%20%7D</b>
 Host: www.example
 User-agent: sparql-client/0.1</pre>

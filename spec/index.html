@@ -392,7 +392,12 @@ span.cancast:hover { background-color: #ffa;
         <h3>Terminology</h3>
         <dl>
           <dt>SPARQL Protocol client</dt>
-          <dd>An HTTP client (as defined by <a data-cite="rfc9110#section-3.3">RFC 9110</a>) that sends HTTP requests for SPARQL
+          <dd>An HTTP client (as defined by
+            <a data-cite="rfc9110#section-3.3">Section 3.3. Connections, Clients, and
+            Servers</a> of [[[RFC9110]]] [[RFC9110]]) that sends HTTP requests for
+            SPARQL Protocol operations. (Also known as: <em>client</em>.)</dd>
+
+          <dd>An HTTP client (as defined by <a data-cite="rfc9110#section-3.3">RFC 9110</a> [[RFC9110]]) that sends HTTP requests for SPARQL
           Protocol operations. (Also known as: <em>client</em>)</dd>
           <dt>SPARQL Protocol service</dt>
           <dd>An HTTP server that services HTTP requests and sends back HTTP responses for SPARQL Protocol operations. The URI at which a SPARQL Protocol service listens for requests is generally
@@ -422,7 +427,7 @@ span.cancast:hover { background-color: #ffa;
         GET or HTTP POST method. Client requests for this operation <strong>must</strong> include exactly one SPARQL query string (parameter name: <code>query</code>) and <strong>may</strong> include
         zero or more default graph URIs (parameter name: <code>default-graph-uri</code>) and named graph URIs (parameter name: <code>named-graph-uri</code>). The response to a query request is either
         the [[[SPARQL12-RESULTS-XML]]], the [[[SPARQL12-RESULTS-JSON]]], the [[[SPARQL12-RESULTS-CSV-TSV]]], or an RDF serialization, depending on the <a data-cite="SPARQL12-QUERY#QueryForms">query
-        form</a> and <a data-cite="rfc9110#section-12">content negotiation</a>.
+        form</a> and <a data-cite="rfc9110#section-12">content negotiation</a> [[RFC9110]].
         </p>
         <span class="doc-ref" id="query-summary"></span>
         <table style="margin-left: auto; margin-right: auto; border-color: rgb(0, 0, 0); border-collapse: collapse; padding: 5px; border: 1px">
@@ -466,16 +471,16 @@ span.cancast:hover { background-color: #ffa;
         <p>The <code>query</code> request's parameters <strong>must</strong> be sent according to one of these three options:</p>
         <section id="query-via-get">
           <h4><code>query</code> via GET</h4>
-          <p>Protocol clients <strong>may</strong> send protocol requests via the HTTP GET method. When using the GET method, clients <strong>must</strong> URL <a data-cite=
-          "rfc3986#section-2.1">percent encode</a> all parameters and include them as <a data-cite="rfc3986#section-3.4">query parameter</a> strings with the names given
+          <p>Protocol clients <strong>may</strong> send protocol requests via the HTTP GET method. When using the GET method, clients <strong>must</strong> URL <a data-cite="rfc3986#section-2.1">percent encode</a> 
+          all parameters and include them as <a data-cite="rfc3986#section-3.4">query parameter</a> strings [[RFC3986]] with the names given
           above.</p>
           <p>HTTP query string parameters <strong>must</strong> be separated with the ampersand (<code>&amp;</code>) character. Clients may include the query string parameters in any order.</p>
           <p>The HTTP request <strong>MUST NOT</strong> include a message body.</p>
         </section>
         <section id="query-via-post-urlencoded">
           <h4><code>query</code> via POST with URL-encoded parameters</h4>
-          <p>Protocol clients <strong>may</strong> send protocol requests via the HTTP POST method by URL encoding the parameters. When using this method, clients <strong>must</strong> URL <a data-cite=
-          "rfc3986#section-2.1">percent encode</a> all parameters and include them as parameters within the request body via the
+          <p>Protocol clients <strong>may</strong> send protocol requests via the HTTP POST method by URL encoding the parameters. When using this method, clients <strong>must</strong> URL 
+          <a data-cite="rfc3986#section-2.1">percent encode</a> [[RFC3986]] all parameters and include them as parameters within the request body via the
           <code>application/x-www-form-urlencoded</code> media type with the name given above. Parameters <strong>must</strong> be separated with the ampersand (<code>&amp;</code>) character. Clients
           may include the parameters in any order. The content type header of the HTTP request <strong>must</strong> be set to <code>application/x-www-form-urlencoded</code>.</p>
         </section>
@@ -498,21 +503,21 @@ span.cancast:hover { background-color: #ffa;
         </section>
         <section id="conneg">
           <h4>Accepted Response Formats</h4>
-          <p>Protocol clients <strong>should</strong> use HTTP <a data-cite="rfc9110#name-content-negotiation">content negotiation</a> to request
+          <p>Protocol clients <strong>should</strong> use HTTP <a data-cite="rfc9110#name-content-negotiation">content negotiation</a> [[RFC9110]] to request
           response formats that the client can consume. See below for more on potential response formats.</p>
         </section>
         <section id="query-success">
           <h4>Success Responses</h4>
-          <p>The SPARQL Protocol uses the response status codes defined in HTTP to indicate the success or failure of an operation. Consult the <a data-cite=
-          "rfc9110#section-15">HTTP specification</a> for detailed definitions of each status code. While a protocol service
+          <p>The SPARQL Protocol uses the response status codes defined in HTTP to indicate the success or failure of an operation. Consult the <a data-cite="rfc9110#section-15">HTTP specification</a> 
+          [[RFC9110]] for detailed definitions of each status code. While a protocol service
           <strong>should</strong> use a 2XX HTTP response code for a successful query, it <strong>may</strong> choose instead to use a 3XX response code as per HTTP.</p>
           <p>The response body of a successful query operation with a 2XX response is either:</p>
           <ul>
-            <li>a SPARQL Results Document in <a data-cite="SPARQL12-RESULTS-XML#">XML</a>, <a data-cite="SPARQL12-RESULTS-JSON#">JSON</a>, or <a data-cite=
-            "SPARQL12-RESULTS-CSV-TSV#">CSV/TSV</a> format (for SPARQL Query forms <a data-cite="SPARQL12-QUERY#select">SELECT</a> and <a data-cite=
-            "SPARQL12-QUERY#ask">ASK</a>); or,</li>
-            <li>an RDF graph [[[RDF12-CONCEPTS]]] serialized, for example, in the [[[RDF12-XML]]], or an equivalent RDF graph serialization, for SPARQL Query forms <a data-cite="SPARQL12-QUERY#describe">DESCRIBE</a> and <a data-cite=
-            "SPARQL12-QUERY#construct">CONSTRUCT</a>).</li>
+            <li>a SPARQL Results Document in <a data-cite="SPARQL12-RESULTS-XML#">XML</a> [[SPARQL12-RESULTS-XML]], <a data-cite="SPARQL12-RESULTS-JSON#">JSON</a> [[SPARQL12-RESULTS-JSON]], or 
+            <a data-cite="SPARQL12-RESULTS-CSV-TSV#">CSV/TSV</a> [[SPARQL12-RESULTS-CSV-TSV]] format (for SPARQL Query forms <a data-cite="SPARQL12-QUERY#select">SELECT</a> and <a data-cite=
+            "SPARQL12-QUERY#ask">ASK</a> [[SPARQL12-QUERY]]); or,</li>
+            <li>an RDF graph [[[RDF12-CONCEPTS]]] serialized, for example, in the [[[RDF12-XML]]], or an equivalent RDF graph serialization, for SPARQL Query forms <a data-cite="SPARQL12-QUERY#describe">DESCRIBE</a> 
+            and <a data-cite="SPARQL12-QUERY#construct">CONSTRUCT</a> [[SPARQL12-QUERY]]).</li>
           </ul>
           <p>The content type of the response to a successful query operation must be the media type defined for the format of the response body.</p>
         </section>
@@ -596,9 +601,10 @@ span.cancast:hover { background-color: #ffa;
         </section>
         <section id="update-success">
           <h4>Success Responses</h4>
-          <p>The SPARQL Protocol uses the response status codes defined in HTTP to indicate the success or failure of an operation. Consult the <a data-cite=
-          "rfc9110#section-15">HTTP specification</a> for detailed definitions of each status code. While a protocol service
-          <strong>should</strong> use a 2XX HTTP response code for an update request that is successfully processed, it <strong>may</strong> choose instead to use a 3XX response code as per HTTP.</p>
+          <p>The SPARQL Protocol uses the response status codes defined in HTTP to indicate the success or failure of an operation. Consult the <a data-cite="rfc9110#section-15">HTTP specification</a> 
+          [[RFC9110]] for detailed definitions of each status code. While a protocol service
+          <strong>should</strong> use a <code>2XX</code> HTTP response code for an update request that is successfully processed, it <strong>may</strong> choose instead to use a <code>3XX</code> 
+          response code as per HTTP.</p>
           <p>The response body of a successful update request is implementation defined. Implementations <strong>may</strong> use HTTP content negotiation to provide both human-readable and
           machine-processable information about the completed update request.</p>
         </section>
@@ -617,7 +623,7 @@ span.cancast:hover { background-color: #ffa;
       </section>
       <section id="base-iri">
         <h3>Determining the Base IRI</h3>
-        <p>The <code>BASE</code> keyword in a SPARQL query or a SPARQL update request string defines the Base IRI used to resolve relative IRIs per [[[rfc3986]]] section 5.1.1, "Base URI Embedded in Content". The SPARQL Protocol
+        <p>The <code>BASE</code> keyword in a SPARQL query or a SPARQL update request string defines the Base IRI used to resolve relative IRIs per [[[RFC3986]]] section 5.1.1, "Base URI Embedded in Content". The SPARQL Protocol
         does not dereference query URIs so section 5.1.3 does not apply. Finally, per section 5.1.4, SPARQL Protocol services <strong>must</strong> define their own base URI, which
         <strong>may</strong> be the service endpoint.</p>
       </section>
@@ -1348,7 +1354,8 @@ WHERE { GRAPH ?g { ?person ?property ?value ; foaf:givenName 'Fred' } }</pre>
         of the update operation.</p>
         <p>Different IRIs may have the same appearance. Characters in different scripts may look similar (a Cyrillic "о" may appear similar to a Latin "o"). A character followed by combining
         characters may have the same visual representation as another character (LATIN SMALL LETTER E followed by COMBINING ACUTE ACCENT has the same visual representation as LATIN SMALL LETTER E
-        WITH ACUTE). Users of SPARQL must take care to construct queries with IRIs that match the IRIs in the data. Further information about matching of similar characters can be found in [[[UTR36]]] and [[[rfc3987]]] Section 8.</p>
+        WITH ACUTE). Users of SPARQL must take care to construct queries with IRIs that match the IRIs in the data. Further information about matching of similar characters can be found in [[[UTR36]]] 
+        and [[[RFC3987]]] Section 8.</p>
       </section>
     </section>
     <section id="conformance">
@@ -1368,7 +1375,7 @@ WHERE { GRAPH ?g { ?person ?property ?value ; foaf:givenName 'Fred' } }</pre>
       <ol>
         <li><strong>must</strong> implement either the <code>query</code> operation or the <code>update</code> operation in the way described in this document ("SPARQL 1.2 Protocol");</li>
         <li><strong>may</strong> implement both the <code>query</code> and <code>update</code> operations;</li>
-        <li><strong>must</strong> be consistent with the normative constraints (indicated by <a data-cite="rfc2119#">RFC2119</a> keywords) described in <a href="#policy">4. Policy
+        <li><strong>must</strong> be consistent with the normative constraints (indicated by <a data-cite="rfc2119#">RFC2119</a> keywords [[RFC2119]]) described in <a href="#policy">4. Policy
         Considerations</a>.</li>
       </ol>
     </section>

@@ -1219,16 +1219,16 @@ Content-Type: application/sparql-results+xml
 &lt;/sparql&gt;</pre>
           </div>
         </section>
-        <section id="select-quoted">
-          <h4>SELECT with quoted triple patterns</h4>
-          <p>SPARQL queries can target quoted triples. This SPARQL query</p>
-          <div id="div-select-quoted">
+        <section id="select-triple-terms">
+          <h4>SELECT with triple term patterns</h4>
+          <p>SPARQL queries can target triple terms. This SPARQL query</p>
+          <div id="div-select-triple-terms">
             <pre class="query nohighlight">PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
 PREFIX ex: &lt;http://example.org/&gt;
 SELECT ?name ?person
-WHERE { &lt;&lt; _:a foaf:name ?name &gt;&gt; ex:statedBy ?person . }</pre>
+WHERE { &lt;&lt;( _:a foaf:name ?name )&gt;&gt; ex:statedBy ?person . }</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/?<b>query=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20ex%3A%20%3Chttp%3A%2F%2Fexample.org%2F%3E%0ASELECT%20%3Fname%20%3Fperson%20%0AWHERE%20%7B%20%3C%3C%20_%3Aa%20foaf%3Aname%20%3Fname%20%3E%3E%20ex%3AstatedBy%20%3Fperson%20.%20%7D</b>
+            <pre class="req nohighlight">GET /sparql/?<b>query=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20ex%3A%20%3Chttp%3A%2F%2Fexample.org%2F%3E%0ASELECT%20%3Fname%20%3Fperson%0AWHERE%20%7B%20%3C%3C%28%20_%3Aa%20foaf%3Aname%20%3Fname%20%29%3E%3E%20ex%3AstatedBy%20%3Fperson%20.%20%7D</b>
 Host: www.example
 User-agent: sparql-client/0.1</pre>
             <pre class="resp nohighlight">HTTP/1.1 200 OK
@@ -1384,7 +1384,7 @@ WHERE { GRAPH ?g { ?person ?property ?value ; foaf:givenName 'Fred' } }</pre>
       <p>This specification extends and updates the <a href="https://www.w3.org/TR/2013/REC-sparql11-protocol-20130321/">SPARQL 1.1 Protocol of March, 2013</a>. The significant changes
       are:</p>
       <ul>
-        <li>Add informative quoted triples example</li>
+        <li>Add informative triple terms example</li>
         <li>Improve display on mobile phones</li>
         <li>Add explicit references to RFCs</li>
         <li>Use PREFIX instead of @prefix in all Turtle examples</li>

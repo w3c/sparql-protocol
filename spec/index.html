@@ -187,8 +187,8 @@
         </ul>
 
         <span class="doc-ref" id="query-summary"></span>
-        <table style="margin-left: auto; margin-right: auto; border-color: rgb(0, 0, 0); border-collapse: collapse; padding: 5px; border: 1px">
-          <tbody>
+        <table class="data">
+          <thead>
             <tr>
               <th>&nbsp;</th>
               <th>HTTP Method</th>
@@ -196,6 +196,8 @@
               <th>Request Content Type</th>
               <th>Request Message Body</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <th>query via GET</th>
               <td>GET</td>
@@ -302,8 +304,8 @@
           URIs (parameter name: <code>using-graph-uri</code>) and named graph URIs (parameter name: <code>using-named-graph-uri</code>). The response to an update request indicates success or failure
           of the request via HTTP response status code.</p>
         <span class="doc-ref" id="update-summary"></span>
-        <table style="margin-left: auto; margin-right: auto; border-color: rgb(0, 0, 0); border-collapse: collapse; padding: 5px; border: 1px">
-          <tbody>
+        <table class="data">
+          <thead>
             <tr>
               <th>&nbsp;</th>
               <th>HTTP Method</th>
@@ -311,6 +313,8 @@
               <th>Request Content Type</th>
               <th>Request Message Body</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <th>update via URL-encoded POST</th>
               <td>POST</td>
@@ -408,7 +412,7 @@
 SELECT ?book ?who 
 WHERE { ?book dc:creator ?who }</pre>
             <p>is conveyed via HTTP GET to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b>PREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%20%0ASELECT%20%3Fbook%20%3Fwho%20%0AWHERE%20%7B%20%3Fbook%20dc%3Acreator%20%3Fwho%20%7D%0A HTTP/1.1
+            <pre class="http">GET /sparql/?query=PREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%20%0ASELECT%20%3Fbook%20%3Fwho%20%0AWHERE%20%7B%20%3Fbook%20dc%3Acreator%20%3Fwho%20%7D%0A HTTP/1.1
 Host: www.example
 User-agent: my-sparql-client/0.1</pre>
             <p>That query against the service-supplied RDF Dataset, executed by that SPARQL query service, returns the following query result:</p>
@@ -442,7 +446,7 @@ Content-Type: application/sparql-results+xml
 SELECT ?book ?who 
 WHERE { ?book dc:creator ?who }</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.other.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b>PREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%20%0ASELECT%20%3Fbook%20%3Fwho%20%0AWHERE%20%7B%20%3Fbook%20dc%3Acreator%20%3Fwho%20%7D%0A<b>&amp;default-graph-uri=</b>http%3A%2F%2Fwww.other.example%2Fbooks HTTP/1.1
+            <pre class="http">GET /sparql/?query=PREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%20%0ASELECT%20%3Fbook%20%3Fwho%20%0AWHERE%20%7B%20%3Fbook%20dc%3Acreator%20%3Fwho%20%7D%0A&amp;default-graph-uri=http%3A%2F%2Fwww.other.example%2Fbooks HTTP/1.1
 Host: www.other.example
 User-agent: my-sparql-client/0.1
 </pre>
@@ -481,7 +485,7 @@ WHERE { ?s ?p ?o. myfoaf:jose foaf:nick "Jo".
               &amp;&amp; ! ( ?s = myfoaf:julia &amp;&amp; ?p = rdf:type &amp;&amp; ?o = foaf:Person))
 }</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b><i>EncodedQuery</i><b>&amp;default-graph-uri=</b>http%3A%2F%2Fwww.example%2Fjose-foaf.rdf HTTP/1.1
+            <pre class="http">GET /sparql/?query=<i>EncodedQuery</i>&amp;default-graph-uri=http%3A%2F%2Fwww.example%2Fjose-foaf.rdf HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
 Accept: text/turtle, application/rdf+xml</pre>
@@ -509,7 +513,7 @@ myfoaf:jose foaf:name "Jose Jimeñez";
             <pre class="sparql">PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt;
 ASK WHERE { ?book dc:creator "J.K. Rowling"}</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b><i>EncodedQuery</i><b>&amp;default-graph-uri=</b>http%3A%2F%2Fwww.example%2Fbooks HTTP/1.1
+            <pre class="http">GET /sparql/?query=<i>EncodedQuery</i>&amp;default-graph-uri=http%3A%2F%2Fwww.example%2Fbooks HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
 </pre>
@@ -534,7 +538,7 @@ Content-Type: application/sparql-results+xml
             <pre class="sparql">PREFIX books: &lt;http://www.example/book/&gt;
 DESCRIBE books:book6</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated here:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b><i>EncodedQuery</i><b>&amp;default-graph-uri=</b>http%3A%2F%2Fwww.example%2Fbooks HTTP/1.1
+            <pre class="http">GET /sparql/?query=<i>EncodedQuery</i>&amp;default-graph-uri=http%3A%2F%2Fwww.example%2Fbooks HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
             <p>With the response illustrated here:</p>
@@ -567,10 +571,10 @@ WHERE {  ?g dc:publisher ?who .
    GRAPH ?g { ?x foaf:mbox ?mbox }
 }</pre>
             <p>is conveyed to the SPARQL query service, http://www.example/sparql/, as illustrated here (with line breaks for legibility):</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b><i>EncodedQuery</i><b>&amp;default-graph-uri=</b>http%3A%2F%2Fwww.example%2Fpublishers
-<b>&amp;default-graph-uri=</b>http%3A%2F%2Fwww.example%2Fmorepublishers<b>&amp;named-graph-uri=</b>http%3A%2F%2Fyour.example%2Ffoaf-alice
-<b>&amp;named-graph-uri=</b>http%3A%2F%2Fwww.example%2Ffoaf-bob<b>&amp;named-graph-uri=</b>http%3A%2F%2Fwww.example%2Ffoaf-susan
-<b>&amp;named-graph-uri=</b>http%3A%2F%2Fthis.example%2Fjohn%2Ffoaf
+            <pre class="http">GET /sparql/?query=<i>EncodedQuery</i>&amp;default-graph-uri=http%3A%2F%2Fwww.example%2Fpublishers
+&amp;default-graph-uri=http%3A%2F%2Fwww.example%2Fmorepublishers&amp;named-graph-uri=http%3A%2F%2Fyour.example%2Ffoaf-alice
+&amp;named-graph-uri=http%3A%2F%2Fwww.example%2Ffoaf-bob&amp;named-graph-uri=http%3A%2F%2Fwww.example%2Ffoaf-susan
+&amp;named-graph-uri=http%3A%2F%2Fthis.example%2Fjohn%2Ffoaf
 Host: www.example
 User-agent: sparql-client/0.1</pre>
             <p>With the response illustrated here:</p>
@@ -606,7 +610,7 @@ WHERE { ?g dc:publisher ?who .
         GRAPH ?g { ?x foaf:mbox ?mbox }
 }</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b><i>EncodedQuery</i> HTTP/1.1
+            <pre class="http">GET /sparql/?query=<i>EncodedQuery</i> HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
             <p>With the response illustrated here:</p>
@@ -637,8 +641,8 @@ WHERE { ?g dc:publisher ?who .
         GRAPH ?g { ?x foaf:mbox ?mbox }
 }</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b><i>EncodedQuery</i><b>&amp;default-graph-uri=</b>http%3A%2F%2Fwww.example%2Fmorepublishers
-<b>&amp;named-graph-uri=</b>http%3A%2F%2Fwww.example%2Fbob<b>&amp;named-graph-uri=</b>http%3A%2F%2Fwww.example%2Falice HTTP/1.1
+            <pre class="http">GET /sparql/?query=<i>EncodedQuery</i>&amp;default-graph-uri=http%3A%2F%2Fwww.example%2Fmorepublishers
+&amp;named-graph-uri=http%3A%2F%2Fwww.example%2Fbob&amp;named-graph-uri=http%3A%2F%2Fwww.example%2Falice HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
             <p>This protocol operation contains an ambiguous RDF Dataset: the dataset specified in the query is different than the one specified in the protocol (by way of
@@ -693,7 +697,7 @@ SELECT ?name
 WHERE { ?x foaf:name ?name
 ORDER BY ?name }</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b><i>EncodedQuery</i><b>&amp;default-graph-uri=</b>http%3A%2F%2Fwww.example%2Fmorepublishers HTTP/1.1
+            <pre class="http">GET /sparql/?query=<i>EncodedQuery</i>&amp;default-graph-uri=http%3A%2F%2Fwww.example%2Fmorepublishers HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
             <p>With the error response illustrated here:</p>
@@ -716,7 +720,7 @@ FROM &lt;http://another.example/protein-db.rdf&gt;
 WHERE { ?x bio:protein ?valence }
 ORDER BY ?valence</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b><i>EncodedQuery</i><b>&amp;default-graph-uri=</b>http%3A%2F%2Fanother.example%2Fprotein-db.rdf HTTP/1.1
+            <pre class="http">GET /sparql/?query=<i>EncodedQuery</i>&amp;default-graph-uri=http%3A%2F%2Fanother.example%2Fprotein-db.rdf HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
             <p>With the error response illustrated here:</p>
@@ -905,7 +909,7 @@ User-agent: sparql-client/0.1
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 9461
 
-<b>query=</b><i>EncodedQuery</i><b>&amp;default-graph-uri=</b>http%3A%2F%2Fanother.example%2Fcalendar.rdf</pre>
+query=<i>EncodedQuery</i>&amp;default-graph-uri=http%3A%2F%2Fanother.example%2Fcalendar.rdf</pre>
             <p>With the response illustrated here:</p>
             <pre class="http">HTTP/1.1 200 OK
 Date: Wed, 03 Aug 2005 12:48:25 GMT
@@ -965,7 +969,7 @@ PREFIX 食: &lt;http://www.w3.org/2001/sw/DataAccess/tests/data/i18n/kanji.ttl#&
 SELECT ?name ?food 
 WHERE { [ foaf:name ?name ; 食:食べる ?food ] . }</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b>PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20%E9%A3%9F%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2Fsw%2FDataAccess%2Ftests%2Fdata%2Fi18n%2Fkanji.ttl%23%3E%0ASELECT%20%3Fname%20%3Ffood%20%0AWHERE%20%7B%20%5B%20foaf%3Aname%20%3Fname%20%3B%20%E9%A3%9F%3A%E9%A3%9F%E3%81%B9%E3%82%8B%20%3Ffood%20%5D%20.%20%7D
+            <pre class="http">GET /sparql/?query=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20%E9%A3%9F%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2Fsw%2FDataAccess%2Ftests%2Fdata%2Fi18n%2Fkanji.ttl%23%3E%0ASELECT%20%3Fname%20%3Ffood%20%0AWHERE%20%7B%20%5B%20foaf%3Aname%20%3Fname%20%3B%20%E9%A3%9F%3A%E9%A3%9F%E3%81%B9%E3%82%8B%20%3Ffood%20%5D%20.%20%7D
 Host: www.example
 User-agent: sparql-client/0.1</pre>
             <pre class="http">HTTP/1.1 200 OK
@@ -989,7 +993,7 @@ PREFIX ex: &lt;http://example.org/&gt;
 SELECT ?name ?person
 WHERE { &lt;&lt; _:a foaf:name ?name &gt;&gt; ex:statedBy ?person . }</pre>
             <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>. Since the query is using SPARQL 1.2 syntax, and the query does not announce the 1.2 version syntactically, the GET request is issued using the <code>version=1.2</code> parameter. This is illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/<b>?query=</b>PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20ex%3A%20%3Chttp%3A%2F%2Fexample.org%2F%3E%0ASELECT%20%3Fname%20%3Fperson%0AWHERE%20%7B%20%3C%3C%28%20_%3Aa%20foaf%3Aname%20%3Fname%20%29%3E%3E%20ex%3AstatedBy%20%3Fperson%20.%20%7D<b>&version=</b>1.2
+            <pre class="http">GET /sparql/?query=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20ex%3A%20%3Chttp%3A%2F%2Fexample.org%2F%3E%0ASELECT%20%3Fname%20%3Fperson%0AWHERE%20%7B%20%3C%3C%28%20_%3Aa%20foaf%3Aname%20%3Fname%20%29%3E%3E%20ex%3AstatedBy%20%3Fperson%20.%20%7D&version=1.2
 Host: www.example
 User-agent: sparql-client/0.1</pre>
             <pre class="http">HTTP/1.1 200 OK
@@ -1013,7 +1017,7 @@ PREFIX ex: &lt;http://example.org/&gt;
 SELECT ?statement ?person
 WHERE { ?statement ex:statedBy ?person . FILTER (isTRIPLE(?statement)) }</pre>
           <p>While the query announces its version syntactically, the SPARQL client decides to send the direct POST request using the <code>version=1.2</code> media-type, which is allowed but not required if the version is already announced syntactically. This is illustrated in this HTTP trace:</p>
-          <pre class="req nohighlight">POST /sparql HTTP/1.1
+          <pre class="http">POST /sparql HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
 Content-Type: application/sparql-query; version=1.2
@@ -1044,7 +1048,7 @@ Accept: text/plain
 Content-Length: 62
 Content-Type: application/x-www-form-urlencoded
 
-<b>update=</b>INSERT%20DATA%20%7B%20%3Ca%3E%20%3Cp%3E%20%3Cb%3E%20%7D
+update=INSERT%20DATA%20%7B%20%3Ca%3E%20%3Cp%3E%20%3Cb%3E%20%7D
 </pre>
         </section>
         <section id="update-direct-simple">
@@ -1085,7 +1089,7 @@ Accept: */*
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 130
 
-<b>update=</b>DELETE%20DATA%20%7B%20%3Ca%3E%20%3Cp%3E%20%3Cold%3E%20%7D%20%3B%0AINSERT%20DATA%20%7B%20%3Ca%3E%20%3Cp%3E%20%3Cnew%3E%20%7D</pre>
+update=DELETE%20DATA%20%7B%20%3Ca%3E%20%3Cp%3E%20%3Cold%3E%20%7D%20%3B%0AINSERT%20DATA%20%7B%20%3Ca%3E%20%3Cp%3E%20%3Cnew%3E%20%7D</pre>
         </section>
         <section id="update-urlencoded-multi-dataset">
           <h4>Multi-operation UPDATE specifying dataset and using URL-encoded parameters</h4>
@@ -1101,7 +1105,7 @@ Accept: */*
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 130
 
-<b>using-named-graph-uri=</b>http%3A%2F%2Flocalhost%3A8888%2Falice%2Ffoaf.rdf<b>&amp;using-named-graph-uri=</b>http%3A%2F%2Flocalhost%3A8888%2Feve%2Ffoaf.rdf<b>&amp;update=</b>PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0AINSERT%20%7B%20GRAPH%20%3Chttp%3A%2F%2Flocalhost%3A8888%2Fpeople%3E%20%7B%20%3Fperson%20%3Fproperty%20%3Fvalue%20%7D%20%7D%0AWHERE%20%7B%20GRAPH%20%3Fg%20%7B%20%3Fperson%20%3Fproperty%20%3Fvalue%20%3B%20foaf%3AgivenName%20%27Fred%27%20%7D%20%7D
+using-named-graph-uri=http%3A%2F%2Flocalhost%3A8888%2Falice%2Ffoaf.rdf&amp;using-named-graph-uri=http%3A%2F%2Flocalhost%3A8888%2Feve%2Ffoaf.rdf&amp;update=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0AINSERT%20%7B%20GRAPH%20%3Chttp%3A%2F%2Flocalhost%3A8888%2Fpeople%3E%20%7B%20%3Fperson%20%3Fproperty%20%3Fvalue%20%7D%20%7D%0AWHERE%20%7B%20GRAPH%20%3Fg%20%7B%20%3Fperson%20%3Fproperty%20%3Fvalue%20%3B%20foaf%3AgivenName%20%27Fred%27%20%7D%20%7D
 </pre>
         </section>
         <section id="update-direct-multi-dataset">

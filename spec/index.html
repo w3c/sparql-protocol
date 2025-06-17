@@ -418,10 +418,35 @@ span.cancast:hover { background-color: #ffa;
         <li>The message content included in the HTTP response body.</li>
       </ul>
       <p>The SPARQL 1.2 Protocol is built on top of HTTP. All HTTP requirements for requests and responses <strong>must</strong> be followed.</p>
+
+     <section id="section-version-announcement">
+       <h3>Version Announcement</h3>
+
+       <p>When sending a query or update operation to an endpoint, the version of this operation MAY be announced by either using
+       the syntactical <a data-cite="SPARQL12-QUERY#syntaxVersionAnnouncement">`version` directive</a>,
+       or by passing a <code>version</code> parameter (which depends on the used HTTP method).</p>
+
+       <p>When the version is indicated both in syntax and a parameter,
+         they are expected to be the same.
+         If they differ,
+         parsers use the version from the parameter and might emit a warning about the mismatch.</p>
+
+       <p>To retain compability that is as broad as possible with older parsers,
+         only queries that make use of SPARQL 1.2-specific functionality
+         are encouraged to announce their version (i.e., for queries that do not make use
+         of SPARQL 1.2-specific functionality it is discouraged to announce a version).</p>
+
+       <p>Responses to an operation MAY also contain version announcements.
+       These <em>SPARQL results or RDF versions</em> are not necessarily the same as the <em>operation version</em> specified in the request.
+       Instead, the version announcement is dependent on the response and its format, such as [[[SPARQL12-RESULTS-JSON]]] or [[[RDF12-TURTLE]]].</p>
+
+       <p>Possible values for the version string are discussed in <a data-cite="RDF12-CONCEPTS#defined-version-labels"></a>.</p>
+      </section>
+
       <section id="query-operation">
         <h3>Query Operation</h3>
         <p>The <code>query</code> operation is used to send a SPARQL query to a service and receive the results of the query. The query operation <strong>MUST</strong> be invoked with either the HTTP
-        GET or HTTP POST method. Client requests for this operation <strong>must</strong> include exactly one SPARQL query string (parameter name: <code>query</code>) and <strong>may</strong> include
+        GET or HTTP POST method. Client requests for this operation <strong>must</strong> include exactly one SPARQL query string (parameter name: <code>query</code>) and <strong>may</strong> include a version (parameter name: <code>version</code>), and
         zero or more default graph URIs (parameter name: <code>default-graph-uri</code>) and named graph URIs (parameter name: <code>named-graph-uri</code>). The response to a query request is either
         the [[[SPARQL12-RESULTS-XML]]], the [[[SPARQL12-RESULTS-JSON]]], the [[[SPARQL12-RESULTS-CSV-TSV]]], or an RDF serialization, depending on the <a data-cite="SPARQL12-QUERY#QueryForms">query
         form</a> and <a data-cite="rfc9110#content.negotiation">content negotiation</a> [[RFC9110]].
@@ -440,6 +465,7 @@ span.cancast:hover { background-color: #ffa;
               <th>query via GET</th>
               <td>GET</td>
               <td><code>query</code> (exactly 1)<br>
+              <code>version</code> (0 or 1)<br>
               <code>default-graph-uri</code> (0 or more)<br>
               <code>named-graph-uri</code> (0 or more)</td>
               <td>None</td>
@@ -452,6 +478,7 @@ span.cancast:hover { background-color: #ffa;
               <td><code>application/x-www-form-urlencoded</code></td>
               <td>URL-encoded, ampersand-separated query parameters.<br>
               <code>query</code> (exactly 1)<br>
+              <code>version</code> (0 or 1)<br>
               <code>default-graph-uri</code> (0 or more)<br>
               <code>named-graph-uri</code> (0 or more)</td>
             </tr>
@@ -460,7 +487,7 @@ span.cancast:hover { background-color: #ffa;
               <td>POST</td>
               <td><code>default-graph-uri</code> (0 or more)<br>
               <code>named-graph-uri</code> (0 or more)</td>
-              <td><code>application/sparql-query</code></td>
+              <td><code>application/sparql-query</code> (with optional <code>version</code> media-type parameter)</td>
               <td>Unencoded SPARQL query string</td>
             </tr>
           </tbody>
@@ -485,7 +512,7 @@ span.cancast:hover { background-color: #ffa;
           <h4><code>query</code> via POST directly</h4>
           <p>Protocol clients <strong>may</strong> send protocol requests via the HTTP POST method by including the query directly and unencoded as the HTTP request message body. When using this
           approach, clients <strong>must</strong> include the SPARQL query string, unencoded, and nothing else as the message body of the request. Clients <strong>must</strong> set the content type
-          header of the HTTP request to <code>application/sparql-query</code>. Clients <strong>may</strong> include the optional <code>default-graph-uri</code> and <code>named-graph-uri</code>
+          header of the HTTP request to <code>application/sparql-query</code>, with an optional <code>version</code> media-type parameter. Clients <strong>may</strong> include the optional <code>default-graph-uri</code> and <code>named-graph-uri</code>
           parameters as HTTP query string parameters in the request URI. Note that UTF-8 is the only valid charset here.</p>
         </section>
         <section id="dataset">
@@ -535,7 +562,7 @@ span.cancast:hover { background-color: #ffa;
         <h3>Update Operation</h3>
         <p>
           The <code>update</code> operation is used to send a SPARQL update request to a service. The update operation <strong>must</strong> be invoked using the HTTP POST method. Client requests
-          for this operation <strong>must</strong> include exactly one SPARQL update request string (parameter name: <code>update</code>) and <strong>may</strong> include zero or more default graph
+          for this operation <strong>must</strong> include exactly one SPARQL update request string (parameter name: <code>update</code>) and <strong>may</strong> include a version (parameter name: <code>version</code>) and zero or more default graph
           URIs (parameter name: <code>using-graph-uri</code>) and named graph URIs (parameter name: <code>using-named-graph-uri</code>). The response to an update request indicates success or failure
           of the request via HTTP response status code.</p>
         <span class="doc-ref" id="update-summary"></span>
@@ -554,6 +581,7 @@ span.cancast:hover { background-color: #ffa;
               <td>None</td>
               <td><code>application/x-www-form-urlencoded</code></td>
               <td>URL-encoded, ampersand-separated query parameters.<br>
+              <code>version</code> (0 or 1)<br>
               <code>update</code> (exactly 1)<br>
               <code>using-graph-uri</code> (0 or more)<br>
               <code>using-named-graph-uri</code> (0 or more)</td>
@@ -563,7 +591,7 @@ span.cancast:hover { background-color: #ffa;
               <td>POST</td>
               <td><code>using-graph-uri</code> (0 or more)<br>
               <code>using-named-graph-uri</code> (0 or more)</td>
-              <td><code>application/sparql-update</code></td>
+              <td><code>application/sparql-update</code> (with optional <code>version</code> media-type parameter)</td>
               <td>Unencoded SPARQL update request string</td>
             </tr>
           </tbody>
@@ -580,7 +608,7 @@ span.cancast:hover { background-color: #ffa;
           <h4><code>update</code> via POST directly</h4>
           <p>Protocol clients <strong>may</strong> send update protocol requests via the HTTP POST method by including the update request directly and unencoded as the HTTP request message body. When
           using this approach, clients <strong>must</strong> include the SPARQL update request string, unencoded, and nothing else as the message body of the request. Clients <strong>must</strong>
-          set the content type header of the HTTP request to <code>application/sparql-update</code>. Clients <strong>may</strong> include the optional <code>using-graph-uri</code> and
+          set the content type header of the HTTP request to <code>application/sparql-update</code>, with an optional <code>version</code> media-type parameter. Clients <strong>may</strong> include the optional <code>using-graph-uri</code> and
           <code>using-named-graph-uri</code> parameters as HTTP query string parameters in the request URI.</p>
         </section>
         <section id="update-dataset">
@@ -1224,8 +1252,8 @@ Content-Type: application/sparql-results+xml
 PREFIX ex: &lt;http://example.org/&gt;
 SELECT ?name ?person
 WHERE { &lt;&lt; _:a foaf:name ?name &gt;&gt; ex:statedBy ?person . }</pre>
-            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
-            <pre class="req nohighlight">GET /sparql/?<b>query=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20ex%3A%20%3Chttp%3A%2F%2Fexample.org%2F%3E%0ASELECT%20%3Fname%20%3Fperson%0AWHERE%20%7B%20%3C%3C%28%20_%3Aa%20foaf%3Aname%20%3Fname%20%29%3E%3E%20ex%3AstatedBy%20%3Fperson%20.%20%7D</b>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>. Since the query is using SPARQL 1.2 syntax, and the query does not announce the 1.2 version syntactically, the GET request is issued using the <code>version=1.2</code> parameter. This is illustrated in this HTTP trace:</p>
+            <pre class="req nohighlight">GET /sparql/?<b>query=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20ex%3A%20%3Chttp%3A%2F%2Fexample.org%2F%3E%0ASELECT%20%3Fname%20%3Fperson%0AWHERE%20%7B%20%3C%3C%28%20_%3Aa%20foaf%3Aname%20%3Fname%20%29%3E%3E%20ex%3AstatedBy%20%3Fperson%20.%20%7D&version=1.2</b>
 Host: www.example
 User-agent: sparql-client/0.1</pre>
             <pre class="resp nohighlight">HTTP/1.1 200 OK
@@ -1239,6 +1267,33 @@ Content-Type: application/sparql-results+xml
 ...
 &lt;/sparql&gt;</pre>
           </div>
+        </section>
+        <section id="select-reified-triples-post-direct">
+          <h4>SELECT with 1.2 query and 1.2 response using direct POST</h4>
+            <p>The query below uses the <code>isTRIPLE</code> function. Since this is a SPARQL 1.2 feature, it announces its version syntactically:</p>
+            <pre class="query nohighlight">VERSION "1.2"
+PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
+PREFIX ex: &lt;http://example.org/&gt;
+SELECT ?statement ?person
+WHERE { ?statement ex:statedBy ?person . FILTER (isTRIPLE(?statement)) }</pre>
+          <p>While the query announces its version syntactically, the SPARQL client decides to send the direct POST request using the <code>version=1.2</code> media-type, which is allowed but not required if the version is already announced syntactically. This is illustrated in this HTTP trace:</p>
+          <pre class="req nohighlight">POST /sparql HTTP/1.1
+Host: www.example
+User-agent: sparql-client/0.1
+Content-Type: application/sparql-query; version=1.2
+
+<i>UnencodedQuery</i></pre>
+            <p>Since the response will contain RDF 1.2 triple terms, the server responds with a <code>version=1.2</code> media type parameter:</p>
+            <pre class="resp nohighlight">HTTP/1.1 200 OK
+Date: Wed, 03 Aug 2005 12:48:25 GMT
+Server: Apache/1.3.29 (Unix)
+Connection: close
+Content-Type: application/sparql-results+xml; version=1.2
+
+&lt;?xml version="1.0"?&gt;
+&lt;sparql xmlns="http://www.w3.org/2005/sparql-results#"&gt;
+...
+&lt;/sparql&gt;</pre>
         </section>
       </section>
       <section id="update-bindings-http-examples">

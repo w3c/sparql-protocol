@@ -671,7 +671,7 @@ span.cancast:hover { background-color: #ffa;
             <pre class="query nohighlight">PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt; 
 SELECT ?book ?who 
 WHERE { ?book dc:creator ?who }</pre>
-            <p>is conveyed via HTTP GET to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed via HTTP GET to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query</b>=PREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%20%0ASELECT%20%3Fbook%20%3Fwho%20%0AWHERE%20%7B%20%3Fbook%20dc%3Acreator%20%3Fwho%20%7D%0A HTTP/1.1
 Host: www.example
 User-agent: my-sparql-client/0.1</pre>
@@ -705,12 +705,12 @@ Content-Type: application/sparql-results+xml
             <pre class="query nohighlight">PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt; 
 SELECT ?book ?who 
 WHERE { ?book dc:creator ?who }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.other.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.other.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query</b>=PREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%20%0ASELECT%20%3Fbook%20%3Fwho%20%0AWHERE%20%7B%20%3Fbook%20dc%3Acreator%20%3Fwho%20%7D%0A&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.other.example%2Fbooks HTTP/1.1
 Host: www.other.example
 User-agent: my-sparql-client/0.1
 </pre>
-            <p>That query — against the RDF Dataset identified by the value of the <code>default-graph-uri</code> parameter, <code>/http://www.other.example/books</code> — executed by that SPARQL query
+            <p>That query — against the RDF Dataset identified by the value of the <code>default-graph-uri</code> parameter, <code>http://www.other.example/books</code> — executed by that SPARQL query
             service, returns the following query result:</p>
             <pre class="resp nohighlight">HTTP/1.1 200 OK
 Date: Fri, 06 May 2005 20:55:12 GMT
@@ -744,7 +744,7 @@ WHERE { ?s ?p ?o. myfoaf:jose foaf:nick "Jo".
               &amp;&amp; ! ( ?s = myfoaf:julia &amp;&amp; ?p = foaf:mbox &amp;&amp; ?o = &lt;mailto:julia@mail.example&gt; )
               &amp;&amp; ! ( ?s = myfoaf:julia &amp;&amp; ?p = rdf:type &amp;&amp; ?o = foaf:Person))
 }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.example%2Fjose-foaf.rdf HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
@@ -772,7 +772,7 @@ myfoaf:jose foaf:name "Jose Jimeñez";
           <div id="div-ask-simple">
             <pre class="query nohighlight">PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt; 
 ASK WHERE { ?book dc:creator "J.K. Rowling"}</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.example%2Fbooks HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
@@ -797,7 +797,7 @@ Content-Type: application/sparql-results+xml
           <div id="div-describe-simple">
             <pre class="query nohighlight">PREFIX books: &lt;http://www.example/book/&gt;
 DESCRIBE books:book6</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated here:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated here:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.example%2Fbooks HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
@@ -869,7 +869,7 @@ FROM NAMED &lt;http://www.example/bob&gt;
 WHERE { ?g dc:publisher ?who .
         GRAPH ?g { ?x foaf:mbox ?mbox }
 }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query</b>=<i>EncodedQuery</i> HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
@@ -900,7 +900,7 @@ FROM NAMED &lt;http://www.example/susan&gt;
 WHERE { ?g dc:publisher ?who .
         GRAPH ?g { ?x foaf:mbox ?mbox }
 }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.example%2Fmorepublishers
 &amp;<b>named-graph-uri</b>=http%3A%2F%2Fwww.example%2Fbob&amp;<b>named-graph-uri</b>=http%3A%2F%2Fwww.example%2Falice HTTP/1.1
 Host: www.example
@@ -956,7 +956,7 @@ Content-Type: application/sparql-results+xml
 SELECT ?name
 WHERE { ?x foaf:name ?name
 ORDER BY ?name }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fwww.example%2Fmorepublishers HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
@@ -979,7 +979,7 @@ SELECT ?valence
 FROM &lt;http://another.example/protein-db.rdf&gt;
 WHERE { ?x bio:protein ?valence }
 ORDER BY ?valence</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query</b>=<i>EncodedQuery</i>&amp;<b>default-graph-uri</b>=http%3A%2F%2Fanother.example%2Fprotein-db.rdf HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1</pre>
@@ -1162,7 +1162,7 @@ WHERE {
          :uid "D6042EDF-C1C9-11D6-9446-003065F198AC" .
     }
 }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">POST /sparql/ HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
@@ -1211,7 +1211,7 @@ Content-Type: application/sparql-results+xml
         <section id="select-longpost-direct">
           <h4>Long SELECT query using direct POST</h4>
           <p>SPARQL queries may also be POSTed directly without URL encoding, as described in <a href="#query-via-post-direct">2.1.3 query via POST directly</a>. The same query used in the <a href=
-          "#select-longpost">previous example</a> is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+          "#select-longpost">previous example</a> is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
           <pre class="req nohighlight">POST /sparql/?default-graph-uri=http%3A%2F%2Fanother.example%2Fcalendar.rdf HTTP/1.1
 Host: www.example
 User-agent: sparql-client/0.1
@@ -1228,7 +1228,7 @@ Content-Type: application/sparql-query
 PREFIX 食: &lt;http://www.w3.org/2001/sw/DataAccess/tests/data/i18n/kanji.ttl#&gt;
 SELECT ?name ?food 
 WHERE { [ foaf:name ?name ; 食:食べる ?food ] . }</pre>
-            <p>is conveyed to the SPARQL query service, <code>/http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
             <pre class="req nohighlight">GET /sparql/?<b>query=PREFIX%20foaf%3A%20%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0APREFIX%20%E9%A3%9F%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2001%2Fsw%2FDataAccess%2Ftests%2Fdata%2Fi18n%2Fkanji.ttl%23%3E%0ASELECT%20%3Fname%20%3Ffood%20%0AWHERE%20%7B%20%5B%20foaf%3Aname%20%3Fname%20%3B%20%E9%A3%9F%3A%E9%A3%9F%E3%81%B9%E3%82%8B%20%3Ffood%20%5D%20.%20%7D</b>
 Host: www.example
 User-agent: sparql-client/0.1</pre>

@@ -437,15 +437,15 @@ span.cancast:hover { background-color: #ffa;
          of SPARQL 1.2-specific functionality it is discouraged to announce a version).</p>
 
        <p>Responses to an operation MAY also contain version announcements.
-       These <em>SPARQL results or RDF versions</em> are not necessarily the same as the <em>operation version</em> specified in the request.
+       The <em>SPARQL results version</em> or <em>RDF version</em> is not necessarily the same as the <em>operation version</em> specified in the request.
        Instead, the version announcement is dependent on the response and its format, such as [[[SPARQL12-RESULTS-JSON]]] or [[[RDF12-TURTLE]]].</p>
 
-       <p>Possible values for the version string are discussed in <a data-cite="RDF12-CONCEPTS#defined-version-labels"></a>.</p>
+       <p>Values for the version string are discussed in <a data-cite="RDF12-CONCEPTS#defined-version-labels"></a>.</p>
       </section>
 
       <section id="query-operation">
         <h3>Query Operation</h3>
-        <p>The <code>query</code> operation is used to send a SPARQL query to a service and receive the results of the query. The query operation <strong>MUST</strong> be invoked with either the HTTP
+        <p>The <code>query</code> operation is used to send a SPARQL query to a service and receive the results of the query. The query operation <strong>must</strong> be invoked with either the HTTP
         GET or HTTP POST method. Client requests for this operation <strong>must</strong> include exactly one SPARQL query string (parameter name: <code>query</code>) and <strong>may</strong> include a version (parameter name: <code>version</code>), and
         zero or more default graph URIs (parameter name: <code>default-graph-uri</code>) and named graph URIs (parameter name: <code>named-graph-uri</code>). The response to a query request is either
         the [[[SPARQL12-RESULTS-XML]]], the [[[SPARQL12-RESULTS-JSON]]], the [[[SPARQL12-RESULTS-CSV-TSV]]], or an RDF serialization, depending on the <a data-cite="SPARQL12-QUERY#QueryForms">query

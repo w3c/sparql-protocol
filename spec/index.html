@@ -438,7 +438,7 @@ span.cancast:hover { background-color: #ffa;
 
        <p>Responses to an operation MAY also contain version announcements.
        The <em>SPARQL results version</em> or <em>RDF version</em> is not necessarily the same as the <em>operation version</em> specified in the request.
-       Instead, the version announcement is dependent on the response and its format, such as [[[SPARQL12-RESULTS-JSON]]] or [[[RDF12-TURTLE]]].</p>
+       Instead, the version announcement is dependent on the response and its format, such as [[[?SPARQL12-RESULTS-JSON]]] or [[[?RDF12-TURTLE]]].</p>
 
        <p>Values for the version string are discussed in <a data-cite="RDF12-CONCEPTS#defined-version-labels"></a>.</p>
       </section>
@@ -462,17 +462,17 @@ span.cancast:hover { background-color: #ffa;
         <ul>
         <li>SPARQL Results:
             <ul>
-            <li>[[[SPARQL12-RESULTS-XML]]]</li>
-            <li>[[[SPARQL12-RESULTS-JSON]]]</li>
-            <li>[[[SPARQL12-RESULTS-CSV-TSV]]]</li>
+            <li>[[[?SPARQL12-RESULTS-XML]]]</li>
+            <li>[[[?SPARQL12-RESULTS-JSON]]]</li>
+            <li>[[[?SPARQL12-RESULTS-CSV-TSV]]]</li>
             </ul></li>
         <li>RDF:
             <ul>
-            <li>[[[RDF12-N-TRIPLES]]]</li>
-            <li>[[[RDF12-TURTLE]]]</li>
-            <li>[[[RDF12-TRIG]]]</li>
-            <li>[[[RDF12-XML]]]</li>
-            <li>[[[JSON-LD11]]]</li>
+            <li>[[[?RDF12-N-TRIPLES]]]</li>
+            <li>[[[?RDF12-TURTLE]]]</li>
+            <li>[[[?RDF12-TRIG]]]</li>
+            <li>[[[?RDF12-XML]]]</li>
+            <li>[[[?JSON-LD11]]]</li>
             </ul></li>
         </ul>
         
@@ -562,10 +562,10 @@ span.cancast:hover { background-color: #ffa;
           <strong>should</strong> use a 2XX HTTP response code for a successful query, it <strong>may</strong> choose instead to use a 3XX response code as per HTTP.</p>
           <p>The response body of a successful query operation with a 2XX response is either:</p>
           <ul>
-            <li>a SPARQL Results Document (such as [[[SPARQL12-RESULTS-XML]]], [[[SPARQL12-RESULTS-JSON]]],
-            or [[[SPARQL12-RESULTS-CSV-TSV]]]) for SPARQL Query forms <a data-cite="SPARQL12-QUERY#select">SELECT</a>
+            <li>a SPARQL Results Document (such as [[[?SPARQL12-RESULTS-XML]]], [[[?SPARQL12-RESULTS-JSON]]],
+            or [[[?SPARQL12-RESULTS-CSV-TSV]]]) for SPARQL Query forms <a data-cite="SPARQL12-QUERY#select">SELECT</a>
             and <a data-cite="SPARQL12-QUERY#ask">ASK</a> [[SPARQL12-QUERY]]; or,</li>
-            <li>a serialized RDF graph [[RDF12-CONCEPTS]] (for example, in [[[RDF12-TURTLE]]], [[[RDF12-XML]]], or an equivalent RDF graph serialization)
+            <li>a serialized RDF graph [[RDF12-CONCEPTS]] (for example, in [[[?RDF12-TURTLE]]], [[[?RDF12-XML]]], or an equivalent RDF graph serialization)
             for SPARQL Query forms <a data-cite="SPARQL12-QUERY#describe">DESCRIBE</a> 
             and <a data-cite="SPARQL12-QUERY#construct">CONSTRUCT</a> [[SPARQL12-QUERY]].</li>
           </ul>

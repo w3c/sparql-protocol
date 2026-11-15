@@ -739,8 +739,8 @@ could not be retrieved within the time alloted.
         </section>
         <section id="select-longpost">
           <h4>Long SELECT query using POST with URL encoding</h4>
-          <p>Some SPARQL queries, perhaps machine generated, may be longer than can be reliably conveyed by way of the HTTP GET binding described in <a href="#query-via-get">2.1.1 query via GET</a>.
-          In those cases the POST binding described in <a href="#query-via-post-urlencoded">2.1.2 query via POST with URL-encoded parameters</a> may be used. This SPARQL query</p>
+          <p>Some SPARQL queries, perhaps machine generated, may be longer than can be reliably conveyed by way of the HTTP GET binding described in <a href="#query-via-get">2.2.1 query via GET</a>.
+          In those cases the POST binding described in <a href="#query-via-post-urlencoded">2.2.2 query via POST with URL-encoded parameters</a> may be used. This SPARQL query</p>
           <div id="div-select-longpost">
             <pre class="sparql">PREFIX : &lt;http://www.w3.org/2002/12/cal/icaltzd#&gt;
 PREFIX Chi: &lt;http://www.w3.org/2002/12/cal/test/Chiefs.ics#&gt;
@@ -950,7 +950,7 @@ Content-Type: application/sparql-results+xml
         </section>
         <section id="select-longpost-direct">
           <h4>Long SELECT query using direct POST</h4>
-          <p>SPARQL queries may also be POSTed directly without URL encoding, as described in <a href="#query-via-post-direct">2.1.3 query via POST directly</a>. The same query used in the <a href=
+          <p>SPARQL queries may also be POSTed directly without URL encoding, as described in <a href="#query-via-post-direct">2.2.3 query via POST directly</a>. The same query used in the <a href=
           "#select-longpost">previous example</a> is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated in this HTTP trace:</p>
           <pre class="http">POST /sparql/?default-graph-uri=http%3A%2F%2Fanother.example%2Fcalendar.rdf HTTP/1.1
 Host: www.example

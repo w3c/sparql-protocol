@@ -568,7 +568,7 @@ SELECT ?who ?g ?mbox
 WHERE {  ?g dc:publisher ?who .
    GRAPH ?g { ?x foaf:mbox ?mbox }
 }</pre>
-            <p>is conveyed to the SPARQL query service, http://www.example/sparql/, as illustrated here (with line breaks for legibility):</p>
+            <p>is conveyed to the SPARQL query service, <code>http://www.example/sparql/</code>, as illustrated here (with line breaks for legibility):</p>
             <pre class="http">GET /sparql/?query=<i>EncodedQuery</i>&amp;default-graph-uri=http%3A%2F%2Fwww.example%2Fpublishers
 &amp;default-graph-uri=http%3A%2F%2Fwww.example%2Fmorepublishers&amp;named-graph-uri=http%3A%2F%2Fyour.example%2Ffoaf-alice
 &amp;named-graph-uri=http%3A%2F%2Fwww.example%2Ffoaf-bob&amp;named-graph-uri=http%3A%2F%2Fwww.example%2Ffoaf-susan

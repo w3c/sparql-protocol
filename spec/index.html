@@ -127,7 +127,7 @@
        or by passing a <code>version</code> parameter (which depends on the used HTTP method).</p>
 
        <p>When the version is indicated both in syntax and a parameter, they SHOULD be the same.
-         If they differ, parsers MUST the version from the parameter and MAY emit a warning about the mismatch.</p>
+         If they differ, parsers MUST use the version from the parameter and MAY emit a warning about the mismatch.</p>
 
        <p>If a request contains a version announcement for a version that the service does not recognize or support,
          the service SHOULD reject the request with a response with a 4XX HTTP response code.</p>
